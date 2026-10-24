@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+  <title id="title">KYC Smart Card — expanded dual-mode architecture</title>
+  <desc id="desc">The expanded KYC design supports an RFID smartcard path and a Bluetooth LE mobile path through an ESP32 bridge, plus web and Flutter clients connected to a Django API. JWT sessions and a database support account and document workflows. The paper describes combining a card or app key, a database key, and a server-side key to decrypt stored documents.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#343fae"/></marker>
+    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#e8e5f1" stroke-width="1"/></pattern>
+    <style>
+      .bg{fill:#fbfaff}.grid{fill:url(#grid)}.frame{fill:none;stroke:#211b43;stroke-width:4}.titlebar{fill:#343fae}.title{font:700 23px Arial,sans-serif;fill:#fff}.sub{font:16px Arial,sans-serif;fill:#514b6d}.lane{font:700 14px Arial,sans-serif;fill:#625b7b;letter-spacing:2px}.box{stroke:#211b43;stroke-width:3}.t{font:700 18px Arial,sans-serif;fill:#211b43;text-anchor:middle}.s{font:15px Arial,sans-serif;fill:#514b6d;text-anchor:middle}.tag{font:700 12px Arial,sans-serif;fill:#343fae;letter-spacing:1px}.arrow{fill:none;stroke:#343fae;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#b18c08;stroke-width:3;stroke-dasharray:9 7;marker-end:url(#arrow)}.small{font:14px Arial,sans-serif;fill:#625b7b}.note{font:700 15px Arial,sans-serif;fill:#8b3e22}.pill{fill:#fff7dc;stroke:#b18c08;stroke-width:2}.key{fill:#fff0bf;stroke:#211b43;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1280" height="820"/><rect class="grid" width="1280" height="820"/><rect class="frame" x="12" y="12" width="1256" height="796"/>
+  <rect class="titlebar" x="14" y="14" width="1252" height="58"/><text class="title" x="38" y="51">KYC SMART CARD · DUAL-MODE AUTHENTICATION</text>
+  <text class="sub" x="38" y="100">Architecture redrawn from the June 2025 paper · RFID or Bluetooth LE + web/mobile document access</text>
+  <text class="lane" x="38" y="132">AUTHENTICATION ENTRY POINTS</text>
+
+  <g><rect class="box" x="38" y="154" width="202" height="112" rx="5" fill="#fff0bf"/><text class="tag" x="52" y="174">PHYSICAL PATH</text><text class="t" x="139" y="202"><tspan x="139">RFID smartcard</tspan><tspan x="139" dy="23">+ RFID reader</tspan></text><text class="s" x="139" y="246">Card credential</text></g>
+  <g><rect class="box" x="38" y="286" width="202" height="112" rx="5" fill="#e5e2ff"/><text class="tag" x="52" y="306">MOBILE PATH</text><text class="t" x="139" y="334"><tspan x="139">Flutter app</tspan><tspan x="139" dy="23">Bluetooth LE</tspan></text><text class="s" x="139" y="378">Pairing / mobile auth</text></g>
+  <g><rect class="box" x="38" y="418" width="202" height="112" rx="5" fill="#dff7ec"/><text class="tag" x="52" y="438">WEB PATH</text><text class="t" x="139" y="466"><tspan x="139">Web portal</tspan><tspan x="139" dy="23">login / documents</tspan></text><text class="s" x="139" y="510">Browser client</text></g>
+
+  <g><rect class="box" x="310" y="222" width="218" height="146" rx="5" fill="#e5e2ff"/><text class="tag" x="324" y="242">DEVICE BRIDGE</text><text class="t" x="419" y="278"><tspan x="419">ESP32</tspan><tspan x="419" dy="24">authentication bridge</tspan></text><text class="s" x="419" y="330">Coordinates card / BLE data</text><text class="s" x="419" y="351">with server requests</text></g>
+  <path class="arrow" d="M240 210 H278 V258 H301"/><path class="arrow" d="M240 342 H301"/><text class="small" x="273" y="196" text-anchor="middle">RFID</text><text class="small" x="273" y="329" text-anchor="middle">BLE</text>
+
+  <g><rect class="box" x="592" y="222" width="232" height="146" rx="5" fill="#dff7ec"/><text class="tag" x="606" y="242">APPLICATION CORE</text><text class="t" x="708" y="278"><tspan x="708">Django REST API</tspan><tspan x="708" dy="24">identity + server key</tspan></text><text class="s" x="708" y="330">API requests and checks</text><text class="s" x="708" y="351">JWT-based sessions</text></g>
+  <path class="arrow" d="M528 295 H583"/><path class="arrow" d="M240 474 H555 V342 H583"/>
+
+  <g><rect class="box" x="898" y="154" width="204" height="112" rx="5" fill="#e5e2ff"/><text class="tag" x="912" y="174">ACCOUNT DATA</text><text class="t" x="1000" y="202"><tspan x="1000">SQLite / DB</tspan><tspan x="1000" dy="23">profile + key 2</tspan></text><text class="s" x="1000" y="246">User / document index</text></g>
+  <g><rect class="box" x="898" y="286" width="204" height="112" rx="5" fill="#fff0bf"/><text class="tag" x="912" y="306">DOCUMENT STORAGE</text><text class="t" x="1000" y="334"><tspan x="1000">Encrypted files</tspan><tspan x="1000" dy="23">document repository</tspan></text><text class="s" x="1000" y="378">Protected document store</text></g>
+  <path class="arrow" d="M824 270 H860 V210 H889"/><path class="arrow" d="M824 326 H860 V342 H889"/>
+
+  <text class="lane" x="38" y="564">DOCUMENT ACCESS / KEY COMBINATION AS DESCRIBED IN THE PAPER</text>
+  <rect x="38" y="580" width="660" height="124" rx="5" fill="#f5f3ff" stroke="#211b43" stroke-width="3"/>
+  <text class="tag" x="52" y="598">THREE KEY SOURCES REQUIRED</text>
+  <g><rect class="key" x="52" y="610" width="194" height="80" rx="4"/><text class="t" x="149" y="636"><tspan x="149">Key 1 · card/app</tspan></text><text class="s" x="149" y="662">Credential-side key</text></g>
+  <g><rect class="key" x="270" y="610" width="194" height="80" rx="4"/><text class="t" x="367" y="636"><tspan x="367">Key 2 · database</tspan></text><text class="s" x="367" y="662">Data-side key</text></g>
+  <g><rect class="key" x="488" y="610" width="194" height="80" rx="4"/><text class="t" x="585" y="636"><tspan x="585">Key 3 · server</tspan></text><text class="s" x="585" y="662">Server-side key</text></g>
+  <path class="arrow" d="M698 642 H724"/>
+  <g><rect class="box" x="733" y="590" width="190" height="104" rx="5" fill="#e5e2ff"/><text class="t" x="828" y="623"><tspan x="828">Decrypt gate</tspan><tspan x="828" dy="23">combine keys</tspan></text><text class="s" x="828" y="669">All three required</text></g>
+  <path class="arrow" d="M923 642 H956"/>
+  <g><rect class="box" x="965" y="590" width="230" height="104" rx="5" fill="#dff7ec"/><text class="t" x="1080" y="623"><tspan x="1080">Authorized viewer</tspan><tspan x="1080" dy="23">document display</tspan></text><text class="s" x="1080" y="669">Result returned to client</text></g>
+  <path class="dash" d="M1000 398 V544 H828 V581"/>
+  <rect class="pill" x="38" y="718" width="1157" height="54" rx="5"/><text class="note" x="56" y="740">Interpretation note</text><text class="small" x="56" y="760">The three-key flow is the architecture described by the paper; this figure is not an independent security assessment or deployment claim.</text>
+  <text class="small" x="38" y="795">Source: IJIRT 180300 · KYC Smart Card · Vol. 12, Issue 1 (June 2025), pp. 646–652</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Dynamic Toll Charging System — recreated architecture diagram</title>
+  <desc id="desc">Entry-side ANPR camera, YOLOv8 plate detection, OCR, and entry database connect to an exit-side RFID scan, entry-exit record matching, distance-based toll calculation, and a prototype demo wallet.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#343fae"/></marker>
+    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="#e8e5f1" stroke-width="1"/></pattern>
+    <style>
+      .bg{fill:#fbfaff}.grid{fill:url(#grid)}.frame{fill:none;stroke:#211b43;stroke-width:4}.titlebar{fill:#343fae}.title{font:700 23px Arial,sans-serif;fill:#fff}.sub{font:16px Arial,sans-serif;fill:#514b6d}.lane{font:700 14px Arial,sans-serif;fill:#625b7b;letter-spacing:2px}.box{stroke:#211b43;stroke-width:3}.t{font:700 18px Arial,sans-serif;fill:#211b43;text-anchor:middle}.s{font:15px Arial,sans-serif;fill:#514b6d;text-anchor:middle}.tag{font:700 12px Arial,sans-serif;fill:#343fae;letter-spacing:1px}.arrow{fill:none;stroke:#343fae;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#b18c08;stroke-width:3;stroke-dasharray:9 7;marker-end:url(#arrow)}.small{font:14px Arial,sans-serif;fill:#625b7b}.note{font:700 15px Arial,sans-serif;fill:#8b3e22}.pill{fill:#fff7dc;stroke:#b18c08;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <rect class="grid" width="1200" height="760"/>
+  <rect class="frame" x="12" y="12" width="1176" height="736"/>
+  <rect class="titlebar" x="14" y="14" width="1172" height="58"/>
+  <text class="title" x="38" y="51">DYNAMIC TOLL CHARGING SYSTEM</text>
+  <text class="sub" x="38" y="100">Architecture redrawn from the published system description · Entry ANPR + exit RFID</text>
+  <text class="lane" x="38" y="132">ENTRY POINT · VEHICLE IDENTIFICATION</text>
+  <!-- Entry line connectors -->
+  <path class="arrow" d="M222 208 H260"/><path class="arrow" d="M440 208 H478"/><path class="arrow" d="M658 208 H696"/><path class="arrow" d="M876 208 H914"/>
+  <g><rect class="box" x="38" y="154" width="184" height="108" rx="5" fill="#fff0bf"/><text class="tag" x="52" y="174" fill="#6e5200">01 / CAPTURE</text><text class="t" x="130" y="202"><tspan x="130">ANPR camera</tspan><tspan x="130" dy="22">vehicle image</tspan></text><text class="s" x="130" y="247">Entry lane</text></g>
+  <g><rect class="box" x="260" y="154" width="180" height="108" rx="5" fill="#e5e2ff"/><text class="tag" x="274" y="174" fill="#343fae">02 / DETECT</text><text class="t" x="350" y="207"><tspan x="350">YOLOv8</tspan><tspan x="350" dy="22">plate detection</tspan></text><text class="s" x="350" y="247">Locate plate region</text></g>
+  <g><rect class="box" x="478" y="154" width="180" height="108" rx="5" fill="#dff7ec"/><text class="tag" x="492" y="174" fill="#17664a">03 / READ</text><text class="t" x="568" y="207"><tspan x="568">OCR</tspan><tspan x="568" dy="22">registration ID</tspan></text><text class="s" x="568" y="247">Plate text extraction</text></g>
+  <g><rect class="box" x="696" y="154" width="180" height="108" rx="5" fill="#e5e2ff"/><text class="tag" x="710" y="174" fill="#343fae">04 / RECORD</text><text class="t" x="786" y="207"><tspan x="786">Entry event</tspan><tspan x="786" dy="22">plate + time</tspan></text><text class="s" x="786" y="247">Timestamp + location</text></g>
+  <g><rect class="box" x="914" y="154" width="248" height="108" rx="5" fill="#dff7ec"/><text class="tag" x="928" y="174" fill="#17664a">CENTRAL STORE</text><text class="t" x="1038" y="207"><tspan x="1038">Entry database</tspan><tspan x="1038" dy="22">vehicle / passage record</tspan></text><text class="s" x="1038" y="247">SQL-backed record store</text></g>
+  <!-- travel lane -->
+  <rect x="38" y="304" width="1124" height="60" rx="5" fill="#f2f0fa" stroke="#c8c2e2" stroke-width="2"/>
+  <path d="M64 334 H1136" fill="none" stroke="#aaa4c6" stroke-width="3" stroke-dasharray="18 12"/>
+  <rect x="300" y="315" width="600" height="38" fill="#f2f0fa"/>
+  <text class="t" x="600" y="340">VEHICLE TRAVELS THROUGH TOLL CORRIDOR</text>
+  <text class="lane" x="38" y="408">EXIT POINT · MATCH, CALCULATE, BILL</text>
+  <path class="arrow" d="M222 494 H260"/><path class="arrow" d="M440 494 H478"/><path class="arrow" d="M658 494 H696"/><path class="arrow" d="M876 494 H914"/>
+  <g><rect class="box" x="38" y="438" width="184" height="112" rx="5" fill="#fff0bf"/><text class="tag" x="52" y="458" fill="#6e5200">05 / IDENTIFY</text><text class="t" x="130" y="490"><tspan x="130">RFID reader</tspan><tspan x="130" dy="22">FASTag UID</tspan></text><text class="s" x="130" y="535">Exit lane scan</text></g>
+  <g><rect class="box" x="260" y="438" width="180" height="112" rx="5" fill="#e5e2ff"/><text class="tag" x="274" y="458" fill="#343fae">06 / MATCH</text><text class="t" x="350" y="490"><tspan x="350">Match records</tspan><tspan x="350" dy="22">entry + exit</tspan></text><text class="s" x="350" y="535">Link vehicle passage</text></g>
+  <g><rect class="box" x="478" y="438" width="180" height="112" rx="5" fill="#dff7ec"/><text class="tag" x="492" y="458" fill="#17664a">07 / CALCULATE</text><text class="t" x="568" y="490"><tspan x="568">Distance &amp; toll</tspan><tspan x="568" dy="22">fare engine</tspan></text><text class="s" x="568" y="535">Exit km − entry km</text></g>
+  <g><rect class="box" x="696" y="438" width="180" height="112" rx="5" fill="#e5e2ff"/><text class="tag" x="710" y="458" fill="#343fae">08 / BILL</text><text class="t" x="786" y="490"><tspan x="786">Toll result</tspan><tspan x="786" dy="22">+ receipt</tspan></text><text class="s" x="786" y="535">Charge displayed</text></g>
+  <g><rect class="box" x="914" y="438" width="248" height="112" rx="5" fill="#ffe3dc"/><text class="tag" x="928" y="458" fill="#8b3e22">PROTOTYPE BOUNDARY</text><text class="t" x="1038" y="490"><tspan x="1038">Demo wallet</tspan><tspan x="1038" dy="22">simulated debit</tspan></text><text class="s" x="1038" y="535">No real payment processing</text></g>
+  <!-- match from entry db to exit match -->
+  <path class="dash" d="M1038 262 V390 H350 V429"/>
+  <rect class="pill" x="38" y="590" width="1124" height="92" rx="5"/>
+  <text class="note" x="60" y="618">Implementation note</text>
+  <text class="small" x="60" y="643">The paper describes distance-based billing and linked-account payment. This portfolio diagram reflects the project prototype:</text>
+  <text class="small" x="60" y="664">RFID simulates FASTag and the wallet debit is a demonstration, not a live payment transaction.</text>
+  <text class="small" x="38" y="719">Source: IJIRT 191077 · Dynamic Toll Charging System · Vol. 12, Issue 8 (2026), pp. 5716–5719</text>
+</svg>

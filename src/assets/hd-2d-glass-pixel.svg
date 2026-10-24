@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" shape-rendering="crispEdges">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#10275d"/><stop offset=".34" stop-color="#2674b8"/><stop offset=".58" stop-color="#e98893"/><stop offset=".75" stop-color="#ffc782"/><stop offset="1" stop-color="#eaa6a4"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#436da5"/><stop offset=".48" stop-color="#254f80"/><stop offset="1" stop-color="#111b43"/></linearGradient>
+    <linearGradient id="haze" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ffd39b" stop-opacity="0"/><stop offset=".5" stop-color="#ffe0a1" stop-opacity=".7"/><stop offset="1" stop-color="#ffd39b" stop-opacity="0"/></linearGradient>
+    <pattern id="stars" width="113" height="91" patternUnits="userSpaceOnUse"><rect x="17" y="19" width="4" height="4" fill="#e6f4ff" opacity=".7"/><rect x="81" y="52" width="3" height="3" fill="#fff0c9" opacity=".75"/></pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/><rect width="1920" height="410" fill="url(#stars)"/>
+  <!-- Chunky pixel clouds catch the last sunset light. -->
+  <g fill="#ffb4ac" opacity=".86">
+    <path d="M130 230h65v-18h56v18h50v22h-36v16h-74v-12h-61z"/><path d="M520 172h54v-17h76v17h42v22h-38v14h-82v-12h-52z"/>
+    <path d="M1240 227h66v-18h63v18h40v20h-35v17h-83v-12h-51z"/><path d="M1598 302h50v-15h76v15h47v24h-41v14h-76v-12h-56z"/>
+  </g>
+  <g fill="#ffd09a" opacity=".88"><rect x="165" y="245" width="80" height="12"/><rect x="209" y="229" width="66" height="17"/><rect x="574" y="188" width="81" height="13"/><rect x="1288" y="244" width="93" height="12"/><rect x="1626" y="318" width="95" height="12"/></g>
+  <!-- Distant stepped mountains. -->
+  <path fill="#687bb8" d="M0 650v-58h62v-26h35v-24h44v24h38v-37h40v-26h36v26h43v31h45v-18h44v-29h39v24h43v29h45v-36h38v-22h39v25h44v32h42v-20h49v40h40v-30h38v-26h39v-23h36v27h48v34h41v-22h48v38h41v-28h37v-20h38v27h48v25h41v-28h40v27h49v-21h47v31h45v-28h38v-24h42v32h45v24h43v-20h42v32h42v-15h59v88z" opacity=".78"/>
+  <path fill="#435b95" d="M0 696v-47h74v-23h34v-27h44v22h42v-31h36v-24h34v24h36v30h52v-17h47v-23h39v25h44v18h48v-24h42v-25h37v24h48v24h44v24h44v-26h44v31h45v-37h45v-22h37v31h46v23h44v-29h43v23h47v24h51v-15h46v32h48v-24h45v-27h44v26h43v20h47v-16h45v23h45v-14h48v80z"/>
+  <!-- Sun and luminous pixel haze. -->
+  <g><rect x="1296" y="397" width="20" height="20" fill="#fff5ca"/><rect x="1278" y="417" width="57" height="57" fill="#ffe6ad"/><rect x="1262" y="435" width="89" height="38" fill="#ffd88e"/><rect x="1278" y="474" width="57" height="15" fill="#ffda98"/></g>
+  <rect y="614" width="1920" height="38" fill="url(#haze)"/>
+  <!-- Harbor skyline. -->
+  <g fill="#263a70">
+    <path d="M0 700V580h42v-29h44v149H0z M93 700V567h48v-20h24v153H93z M181 700V592h59v-44h32v152h-91z M285 700V574h46v-27h34v153h-80z M385 700V548h52v-24h28v176h-80z M483 700V575h58v-36h33v161h-91z M590 700V552h40v-24h35v172h-75z M691 700V581h47v-40h33v159h-80z M791 700V561h45v-31h39v170h-84z M897 700V536h58v-23h29v187h-87z M1002 700V575h53v-35h36v160h-89z M1112 700V551h40v-25h41v174h-81z M1213 700V580h47v-37h35v157h-82z M1313 700V555h55v-28h33v173h-88z M1419 700V573h42v-33h39v160h-81z M1521 700V548h59v-22h31v174h-90z M1624 700V580h49v-34h37v154h-86z M1726 700V552h44v-24h45v172h-89z M1833 700V566h43v-31h44v165z"/>
+  </g>
+  <g fill="#ffda99" opacity=".92">
+    <path d="M15 603h7v12h-7z M32 603h7v12h-7z M15 630h7v12h-7z M105 587h8v13h-8z M122 587h8v13h-8z M198 614h8v13h-8z M216 614h8v13h-8z M304 596h8v13h-8z M405 570h8v13h-8z M425 570h8v13h-8z M501 601h8v13h-8z M521 601h8v13h-8z M703 601h8v13h-8z M721 601h8v13h-8z M813 584h8v13h-8z M911 558h8v13h-8z M931 558h8v13h-8z M1017 601h8v13h-8z M1127 574h8v13h-8z M1147 574h8v13h-8z M1230 605h8v13h-8z M1330 579h8v13h-8z M1350 579h8v13h-8z M1436 599h8v13h-8z M1540 570h8v13h-8z M1560 570h8v13h-8z M1642 605h8v13h-8z M1743 574h8v13h-8z M1763 574h8v13h-8z"/>
+  </g>
+  <!-- Water with blocky reflections and low-contrast ripples. -->
+  <rect y="700" width="1920" height="380" fill="url(#water)"/>
+  <g fill="#ffc47c" opacity=".82"><rect x="1160" y="716" width="320" height="7"/><rect x="1211" y="740" width="280" height="6"/><rect x="1262" y="764" width="358" height="8"/><rect x="1177" y="794" width="420" height="6"/><rect x="1235" y="822" width="322" height="7"/><rect x="1280" y="850" width="355" height="5"/><rect x="1147" y="880" width="451" height="8"/><rect x="1249" y="910" width="303" height="6"/><rect x="1190" y="941" width="397" height="5"/><rect x="1298" y="971" width="268" height="7"/></g>
+  <g fill="#94c7ee" opacity=".42"><rect x="74" y="739" width="265" height="5"/><rect x="291" y="764" width="340" height="6"/><rect x="100" y="798" width="456" height="5"/><rect x="466" y="838" width="249" height="5"/><rect x="211" y="878" width="384" height="6"/><rect x="655" y="924" width="294" height="5"/><rect x="83" y="963" width="340" height="5"/></g>
+  <!-- Leafy pixel foreground frames the view. -->
+  <g fill="#153748"><path d="M0 0h40v130h38v49h44v58H91v49h54v48H95v55h42v58H0z"/><path d="M0 480h45v-42h39v32h41v50h42v51H0z"/><path d="M1750 0h170v154h-48v43h-44v56h-52v-46h-42v-59h16z"/><path d="M1810 336h110v210h-40v48h-60v-53h-35v-83h25z"/></g>
+  <g fill="#206458"><path d="M0 76h57v37h35v41h35v40H79v34h47v38H64v33h47v36H79v39h41v38H0z"/><path d="M0 446h40v-30h44v31h37v43h40v36H95v38H0z"/><path d="M1798 28h56v26h38v39h28v48h-42v41h-54v-36h-37v-45h11z"/><path d="M1793 366h62v37h36v42h29v59h-51v35h-49v-47h-27z"/></g>
+  <g fill="#ffca80"><rect x="34" y="164" width="8" height="8"/><rect x="67" y="239" width="8" height="8"/><rect x="22" y="311" width="9" height="9"/><rect x="1814" y="111" width="8" height="8"/><rect x="1870" y="421" width="8" height="8"/><rect x="1831" y="502" width="8" height="8"/></g>
+  <!-- Lantern-lit rooftop on the right. -->
+  <path fill="#142243" d="M1512 822l205-138 203 138v258h-408z"/><path fill="#415b7d" d="M1512 822h408v24h-408z"/><path fill="#1d3154" d="M1572 846h290v234h-290z"/>
+  <g fill="#f6ad6c"><rect x="1628" y="878" width="57" height="106"/><rect x="1726" y="878" width="57" height="106"/><rect x="1823" y="878" width="31" height="106"/></g>
+  <g fill="#fff0b1"><rect x="1640" y="890" width="32" height="82"/><rect x="1738" y="890" width="32" height="82"/><rect x="1831" y="890" width="15" height="82"/></g>
+  <g fill="#192a49"><rect x="1607" y="846" width="20" height="234"/><rect x="1696" y="846" width="20" height="234"/><rect x="1795" y="846" width="20" height="234"/></g>
+  <path fill="#1a644f" d="M1450 976h48v-41h37v30h32v61h-117z M1796 1000h46v-30h39v27h39v83h-124z"/>
+  <!-- A small pixel cat on the ledge. -->
+  <g fill="#10162d"><rect x="1375" y="906" width="50" height="46"/><rect x="1370" y="882" width="18" height="31"/><rect x="1413" y="882" width="18" height="31"/><rect x="1369" y="946" width="65" height="52"/><rect x="1353" y="978" width="96" height="34"/><rect x="1347" y="987" width="23" height="23"/><rect x="1434" y="986" width="25" height="24"/><path d="M1439 958h27v-18h16v26h-16v17h-24z"/></g>
+  <g fill="#ffdc8d"><rect x="1381" y="916" width="8" height="8"/><rect x="1413" y="916" width="8" height="8"/></g>
+  <!-- Foreground ledge. -->
+  <rect y="1014" width="1920" height="66" fill="#15203f"/><rect y="1014" width="1920" height="12" fill="#4b6f91"/><rect y="1044" width="1920" height="9" fill="#273452"/>
+  <g fill="#e6b17a" opacity=".76"><rect x="101" y="1030" width="70" height="5"/><rect x="388" y="1059" width="96" height="5"/><rect x="817" y="1030" width="61" height="5"/><rect x="1238" y="1057" width="111" height="5"/><rect x="1679" y="1031" width="74" height="5"/></g>
+</svg>

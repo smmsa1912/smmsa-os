@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@import './os.css';
+
+:root {
+  --ink: #151227;
+  --wall: #1b1b3a;
+  --chrome: #cfcbe3;
+  --paper: #f6f5fb;
+  --blue: #4f5bd5;
+  --blue-dim: #7c7f9a;
+  --yellow: #ffd23f;
+  --green: #3ddc97;
+  --pink: #ff6fae;
+  --term: #0d0b1a;
+  --taskbar-h: 44px;
+  --pixel: 'Press Start 2P', ui-monospace, monospace;
+  --body: 'VT323', ui-monospace, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--wall);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 22px;
+  line-height: 1.25;
+  -webkit-font-smoothing: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--blue);
+}
+
+:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
