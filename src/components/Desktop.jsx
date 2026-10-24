@@ -7,6 +7,7 @@ import PixelIcon from './PixelIcon'
 import useTrashCount from '../useTrashCount'
 import { appIconName } from '../appIconName'
 import Window from './Window'
+import RecruiterTour from './RecruiterTour'
 import StartMenu from './StartMenu'
 
 const ICON_W = 92
@@ -243,6 +244,7 @@ export default function Desktop() {
         </div>
       )}
       <StartMenu />
+      <RecruiterTour />
       {contextMenu && (
         <div
           className="desktop-context-menu"

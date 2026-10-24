@@ -67,6 +67,12 @@ export default function StartMenu() {
         {query && <button type="button" aria-label="Clear search" onClick={() => setQuery('')}>×</button>}
       </label>
 
+      <button type="button" className="start-recruiter-shortcut" onClick={() => openApp('recruiter')}>
+        <span className="start-recruiter-shortcut-icon"><PixelIcon name="briefcase" size={23} /></span>
+        <span><strong>Recruiter Desk</strong><small>Resume, best projects, skills & contact</small></span>
+        <b aria-hidden="true">↗</b>
+      </button>
+
       {query ? (
         <section className="start-section">
           <div className="start-section-title"><span>SEARCH RESULTS</span><small>{filteredApps.length} apps</small></div>
@@ -96,7 +102,7 @@ export default function StartMenu() {
                   </button>
                 ))}
               </div>
-            ) : <p className="start-empty">Pin your favorite apps in the All apps section below.</p>}
+            ) : <p className="start-empty">No pinned apps.</p>}
           </section>
           <section className="start-section start-recent-section">
             <div className="start-section-title"><span>Recent</span><small>Recently opened</small></div>

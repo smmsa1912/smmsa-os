@@ -59,6 +59,7 @@ export default function Taskbar() {
       <button type="button" className="quick-btn" onClick={() => openApp('quick')} aria-label="Open portfolio home">
         Home
       </button>
+      <button type="button" className="recruiter-desk-btn" onClick={() => openApp('recruiter')} aria-label="Open Recruiter Desk" title="Open Recruiter Desk inside SMMSA-OS"><PixelIcon name="briefcase" size={14} /><span>Recruiter Desk</span></button>
       <button
         type="button"
         className={`sound-btn${sound ? ' on' : ''}`}

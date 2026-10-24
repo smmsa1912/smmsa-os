@@ -151,7 +151,7 @@ export default function RecycleBin() {
                 <div><dt>Modified</dt><dd>{selected.modified || 'Unknown'}</dd></div>
                 <div><dt>Deleted</dt><dd>{displayDeletedDate(selected)}</dd></div>
               </dl>
-              <p className="trash-item-note">{selected.demo ? 'Sample data for the portfolio demo. Restore sends this item into the browser-local File Explorer.' : 'Deleted from the browser-local File Explorer. Restoring returns the item to its original folder when available.'}</p>
+              <p className="trash-item-note">{selected.demo ? 'Demo item · browser-local.' : 'Browser-local item.'}</p>
               <button type="button" className="btn trash-details-restore" onClick={restoreSelected}>↶ Restore {selected.type === 'folder' && selectedGroupSize > 1 ? 'folder + contents' : 'selected'}</button>
             </>}
           </aside>
@@ -161,7 +161,7 @@ export default function RecycleBin() {
           <div className="trash-empty-art" aria-hidden="true"><span>✓</span><i>✦</i></div>
           <p className="trash-kicker">ALL CLEAR // 0 OBJECTS</p>
           <h3>Nothing to see here.</h3>
-          <p>The bin is emptier than a TODO list after a “quick refactor.” Delete something in File Explorer and it’ll show up here.</p>
+          <p>Nothing here yet.</p>
           <span className="trash-empty-stamp">SYSTEM STATUS: SPOTLESS</span>
         </div>
       )}

@@ -81,7 +81,7 @@ export default function Projects() {
                 </button>
               ))}
             </div>
-          ) : <p className="projects-no-results">No matches. Try another search or category.</p>}
+          ) : <p className="projects-no-results">No matching projects.</p>}
         </aside>
 
         {selectedProject ? (
@@ -111,7 +111,7 @@ export default function Projects() {
             {selectedProject.diagrams?.length > 0 && (
               <section className="project-detail-section project-architecture-section" aria-labelledby={`architecture-${selectedProject.id}`}>
                 <h3 id={`architecture-${selectedProject.id}`}>Architecture &amp; system diagrams</h3>
-                <p className="project-diagram-intro">These are explanatory vector diagrams based on public repository documentation, project reports, recorded results, and reference papers. Where implementation code is not linked, the diagram is explicitly labelled high-level. Arrows describe documented or intended flows, not production-readiness claims.</p>
+                <p className="project-diagram-intro">High-level architecture based on available reports and source links; not a production deployment diagram.</p>
                 <div className="project-architecture-list">
                   {selectedProject.diagrams.map((diagram) => {
                     const sourcePaper = publications.find((paper) => paper.id === diagram.sourcePaperId)
@@ -121,7 +121,7 @@ export default function Projects() {
                         <div className="project-architecture-viewport" role="region" aria-label={`${diagram.title} diagram`} tabIndex={0}>
                           <img src={diagram.src} alt={`${selectedProject.name}: ${diagram.title}. ${diagram.caption}`} loading="lazy" decoding="async" />
                         </div>
-                        <p className="project-diagram-scroll-hint" aria-hidden="true">Swipe horizontally to inspect the full diagram →</p>
+                        <p className="project-diagram-scroll-hint" aria-hidden="true">Swipe to view diagram →</p>
                         <figcaption>
                           <span>{diagram.caption}</span>
                           {diagram.sourceLabel && <small className="project-diagram-source">Source basis: {diagram.sourceLabel}</small>}
@@ -149,7 +149,7 @@ export default function Projects() {
               </section>
             )}
             <section className="project-detail-section">
-              <h3>What it does & what I built</h3>
+              <h3>What I built</h3>
               <ul className="plain project-points">
                 {selectedProject.points.map((point) => <li key={point}>{point}</li>)}
               </ul>
@@ -179,7 +179,7 @@ export default function Projects() {
             <footer className="project-detail-footer">
               <div>
                 <strong>{selectedProject.repo || selectedProject.demo ? 'Explore the project' : 'Project notes'}</strong>
-                <p>{selectedProject.repo || selectedProject.demo ? 'Open the available repository or demo.' : 'A public repository or demo link has not been added for this project yet.'}</p>
+                {!(selectedProject.repo || selectedProject.demo) && <p>No public repository or demo yet.</p>}
               </div>
               <div className="links">
                 {selectedProject.repo && <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">View code ↗</a>}
@@ -188,10 +188,10 @@ export default function Projects() {
             </footer>
           </article>
         ) : (
-          <div className="project-detail project-empty-detail"><h2>No project selected</h2><p>Adjust the filters to see more work.</p></div>
+          <div className="project-detail project-empty-detail"><h2>No matching projects</h2></div>
         )}
       </div>
-      <p className="projects-footnote">Only published links are clickable; project descriptions distinguish prototypes and backtests from deployed products or live financial results.</p>
+      <p className="projects-footnote">Prototypes and backtests are labeled as such.</p>
     </section>
   )
 }

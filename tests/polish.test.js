@@ -71,7 +71,7 @@ test('architecture diagrams are rendered with accessible viewports and source li
   assert.match(projects, /aria-label=\{`\$\{diagram\.title\} diagram`\}/)
   assert.match(projects, /sourcePaper\.href/)
   assert.match(projects, /diagram\.sourceUrl/)
-  assert.match(projects, /explanatory vector diagrams based on public repository documentation/)
+  assert.match(projects, /High-level architecture based on available reports and source links/)
 })
 
 

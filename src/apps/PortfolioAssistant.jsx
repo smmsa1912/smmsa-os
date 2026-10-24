@@ -7,11 +7,11 @@ import { buildLocalModelContext, buildQuickPortfolioAnswer, contextualizePortfol
 const WEBGPU_AVAILABLE = supportsLocalPortfolioAI()
 
 const SUGGESTIONS = [
-  'Give me a quick profile summary.',
-  'Compare OSCAR and FinVerse.',
-  'Which project best shows Agentic AI?',
-  'What are FinVerse’s limitations?',
-  'What can I ask you?',
+  'Quick profile',
+  'OSCAR vs FinVerse',
+  'Best Agentic AI project',
+  'FinVerse limitations',
+  'Help',
 ]
 
 function sourceLabel(source) {
@@ -47,7 +47,7 @@ export default function PortfolioAssistant() {
   const [messages, setMessages] = useState(() => [{
     id: 'welcome-message',
     role: 'assistant',
-    content: 'Hey! I’m Ask My Portfolio. Ask naturally about Andrew’s background, skills, experience, projects, research, results or limitations. You can compare projects, ask follow-ups, or say “open skills” to navigate the desktop. Quick answers work immediately; local AI is optional.',
+    content: 'Hi! Ask about Andrew’s projects, skills, experience or research.',
     sources: [],
     mode: 'welcome',
   }])
@@ -96,10 +96,10 @@ export default function PortfolioAssistant() {
       setUseLocalAI(true)
       setEngineState('ready')
       setLoadProgress({ text: 'Model ready and running locally.', progress: 100 })
-      setNotice('Local AI is ready. Your questions and portfolio context are processed in this browser; no inference API is used.')
-    } catch (error) {
+      setNotice('Local AI ready in this browser.')
+    } catch {
       setEngineState('error')
-      setEngineError(error instanceof Error ? error.message : 'Unable to load local AI.')
+      setEngineError('Local AI could not load. Try Quick Answers or check WebGPU support.')
       setNotice('Quick Answers is still available without a model.')
     }
   }
@@ -108,7 +108,7 @@ export default function PortfolioAssistant() {
     const text = String(rawQuestion ?? '').trim()
     if (!text || busy) return
     if (text.length > 500) {
-      setNotice('Please keep questions under 500 characters so the assistant can stay focused.')
+      setNotice('Maximum 500 characters.')
       return
     }
     const userMessage = { id: nextMessageId(), role: 'user', content: text, sources: [] }
@@ -187,7 +187,7 @@ export default function PortfolioAssistant() {
         sources: visibleSources,
         mode: 'local',
       }])
-    } catch (error) {
+    } catch {
       setMessages((current) => [...current, {
         id: nextMessageId(),
         role: 'assistant',
@@ -195,7 +195,7 @@ export default function PortfolioAssistant() {
         sources: directAnswer?.sources ?? fallback.sources ?? [],
         mode: 'quick',
       }])
-      setNotice(`Local AI had a problem, so I answered from the curated portfolio facts instead. ${error instanceof Error ? error.message : ''}`.trim())
+      setNotice('Local AI failed. Showing verified portfolio facts instead.')
     } finally {
       setBusy(false)
     }
@@ -212,9 +212,8 @@ export default function PortfolioAssistant() {
         <div className="portfolio-ai-title-lockup">
           <div className="portfolio-ai-mark" aria-hidden="true">AI</div>
           <div>
-            <p className="portfolio-kicker">PRIVATE · PORTFOLIO-GROUNDED</p>
+            <p className="portfolio-kicker">PORTFOLIO AI</p>
             <h2>Ask My Portfolio</h2>
-            <p>Explore projects, architecture, research and experience.</p>
           </div>
         </div>
         <div className={`portfolio-ai-status ${engineState === 'ready' && useLocalAI ? 'is-local' : ''}`} role="status">
@@ -225,13 +224,13 @@ export default function PortfolioAssistant() {
 
       <div className="portfolio-ai-mode-panel">
         <div className="portfolio-ai-mode-copy">
-          <strong>{engineState === 'ready' ? (useLocalAI ? 'On-device model ready' : 'Local model downloaded') : 'No API key. No inference server.'}</strong>
+          <strong>{engineState === 'ready' ? (useLocalAI ? 'Local model ready' : 'Quick Answers ready') : 'Quick Answers · no setup'}</strong>
           <span>
             {engineState === 'ready'
-              ? 'Open-ended and reasoning questions use the local model. Greetings, navigation, and simple factual lookups are answered directly to keep them accurate.'
-              : 'Quick Answers use Andrew’s curated project data immediately. Optional local AI needs WebGPU and downloads a model on first use; the browser may cache it for future visits.'}
+              ? 'Answers generated on-device.'
+              : 'Load Local AI for open-ended questions. Requires WebGPU and a model download.'}
           </span>
-          <small>Model: {LOCAL_MODEL_ID} · Not fine-tuned on personal data; facts are retrieved at answer time. Runtime reference: <a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">WebLLM ↗</a></small>
+          <small>{LOCAL_MODEL_ID} · Facts retrieved at answer time · <a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">WebLLM ↗</a></small>
         </div>
         <div className="portfolio-ai-mode-actions">
           {engineState === 'ready' ? (
@@ -250,7 +249,7 @@ export default function PortfolioAssistant() {
             </div>
           )}
           {!webGpuAvailable && engineState !== 'ready' && (
-            <small className="portfolio-ai-unavailable">WebGPU is unavailable here. Quick Answers still work.</small>
+            <small className="portfolio-ai-unavailable">WebGPU unavailable · Quick Answers ready</small>
           )}
         </div>
       </div>
@@ -278,27 +277,27 @@ export default function PortfolioAssistant() {
 
       {messages.length >= 1 && (
         <div className="portfolio-ai-suggestions" aria-label="Suggested questions">
-          <p className="portfolio-kicker">TRY ASKING</p>
+          <p className="portfolio-kicker">SUGGESTED</p>
           {SUGGESTIONS.map((suggestion) => <button key={suggestion} type="button" onClick={() => ask(suggestion)}>{suggestion}<span aria-hidden="true">↗</span></button>)}
         </div>
       )}
 
       <form className="portfolio-ai-composer" onSubmit={handleSubmit}>
-        <label htmlFor="portfolio-ai-question">Your question</label>
+        <label htmlFor="portfolio-ai-question">Question</label>
         <div className="portfolio-ai-composer-row">
           <input
             id="portfolio-ai-question"
             ref={inputRef}
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
-            placeholder="Ask naturally, e.g. “compare OSCAR and FinVerse”…"
+            placeholder="Ask about projects, skills, or experience…"
             maxLength={500}
             autoComplete="off"
             disabled={busy}
           />
           <button type="submit" disabled={!question.trim() || busy}>Ask <span aria-hidden="true">↗</span></button>
         </div>
-        <small>Answers are based on the portfolio data. Verify important details in the linked case studies.</small>
+        <small>Check linked case studies for details.</small>
       </form>
     </section>
   )

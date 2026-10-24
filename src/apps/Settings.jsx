@@ -33,9 +33,7 @@ export default function Settings() {
   return (
     <article className="doc settings-doc">
       <h2>Settings</h2>
-      <p className="hint">Make this desktop feel like yours.</p>
       <h3>Desktop theme</h3>
-      <p className="hint theme-hint">Switch the whole desktop between the original pixel look and HD-2D glass surfaces.</p>
       <div className="theme-grid" role="radiogroup" aria-label="Desktop theme">
         {THEMES.map((item) => (
           <button
@@ -77,9 +75,7 @@ export default function Settings() {
         Sound effects: {sound ? 'ON' : 'OFF'}
       </button>
       <h3>Desktop icons</h3>
-      <p>Drag icons to place them anywhere on the desktop. Your layout is saved automatically.</p>
-      <p>Right-click an empty part of the desktop to arrange icons or change your wallpaper.</p>
-      <p className="hint">Your choices are saved in this browser.</p>
+      <p className="hint">Drag icons to move them. Right-click the desktop for layout options.</p>
     </article>
   )
 }

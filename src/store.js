@@ -61,6 +61,7 @@ const patch = (windows, id, changes) =>
 export const useOS = create((set, get) => ({
   windows: [],
   activeId: null,
+  recruiterTourStep: -1,
   selectedProjectId: 'oscar',
   recentApps: [],
   startOpen: false,
@@ -102,9 +103,12 @@ export const useOS = create((set, get) => ({
   },
 
   setSelectedProject: (selectedProjectId) => set({ selectedProjectId }),
+  startRecruiterTour: () => set({ recruiterTourStep: 0, startOpen: false }),
+  advanceRecruiterTour: () => set((s) => ({ recruiterTourStep: Math.min(s.recruiterTourStep + 1, 6) })),
+  endRecruiterTour: () => set({ recruiterTourStep: -1 }),
   toggleStart: () => set((s) => ({ startOpen: !s.startOpen })),
   closeStart: () => set({ startOpen: false }),
-  lockOS: () => set({ locked: true, startOpen: false, snapPreview: null }),
+  lockOS: () => set({ locked: true, startOpen: false, snapPreview: null, recruiterTourStep: -1 }),
   unlockOS: () => set({ locked: false, startOpen: false }),
   restartOS: () => set((s) => ({
     windows: [],
@@ -112,6 +116,7 @@ export const useOS = create((set, get) => ({
     startOpen: false,
     locked: true,
     snapPreview: null,
+    recruiterTourStep: -1,
     restartCount: s.restartCount + 1,
   })),
 

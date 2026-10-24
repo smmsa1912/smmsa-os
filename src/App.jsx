@@ -7,7 +7,6 @@ import Taskbar from './components/Taskbar'
 
 const BOOT_KEY = 'smmsa-booted'
 const SIGNED_IN_KEY = 'smmsa-signed-in'
-const WELCOME_KEY = 'smmsa-welcome-seen-v1'
 
 const hasSessionFlag = (key) => {
   try {
@@ -19,14 +18,13 @@ const hasSessionFlag = (key) => {
 
 export default function App() {
   const restartCount = useOS((s) => s.restartCount)
-  // Remount the session controller on restart so boot state is initialized cleanly.
-  // This avoids synchronously resetting state from an effect.
+  // Keep all recruiter navigation inside the operating-system desktop.
   return <AppSession key={restartCount} isRestart={restartCount > 0} />
 }
 
 function AppSession({ isRestart }) {
   const [booted, setBooted] = useState(() => !isRestart && hasSessionFlag(BOOT_KEY))
-  const [signedIn, setSignedIn] = useState(() => !isRestart && hasSessionFlag(SIGNED_IN_KEY))
+  const [signedIn, setSignedIn] = useState(() => !isRestart && (hasSessionFlag(SIGNED_IN_KEY) || hasSessionFlag(BOOT_KEY)))
   const locked = useOS((s) => s.locked)
   const theme = useOS((s) => s.theme)
   const openApp = useOS((s) => s.openApp)
@@ -35,13 +33,16 @@ function AppSession({ isRestart }) {
   const finishBoot = useCallback(() => {
     try {
       sessionStorage.setItem(BOOT_KEY, '1')
-      sessionStorage.removeItem(SIGNED_IN_KEY)
+      if (isRestart) sessionStorage.removeItem(SIGNED_IN_KEY)
+      else sessionStorage.setItem(SIGNED_IN_KEY, '1')
     } catch {
       // The flow still works without session storage, but may repeat after reload.
     }
     setBooted(true)
-    setSignedIn(false)
-  }, [])
+    setSignedIn(!isRestart)
+    // A public portfolio should not make recruiters click through a fake sign-in.
+    if (!isRestart) useOS.getState().unlockOS()
+  }, [isRestart])
 
   const finishSignIn = useCallback(() => {
     try {
@@ -65,20 +66,12 @@ function AppSession({ isRestart }) {
   }, [isRestart])
 
   useEffect(() => {
-    if (!booted || !signedIn || locked || didAutoOpen.current) return
+    if (isRestart || !booted || !signedIn || locked || didAutoOpen.current) return
     didAutoOpen.current = true
-
-    // Show Portfolio Home automatically only on the first visit to this browser.
-    // Returning visitors can still open it from the Home taskbar button or Start.
-    let welcomeSeen = false
-    try {
-      welcomeSeen = localStorage.getItem(WELCOME_KEY) === '1'
-      if (!welcomeSeen) localStorage.setItem(WELCOME_KEY, '1')
-    } catch {
-      // If storage is blocked, keep the friendly first-session behavior.
-    }
-    if (!welcomeSeen) openApp('quick')
-  }, [booted, signedIn, locked, openApp])
+    // Open Recruiter Desk inside the desktop so the first window gives hiring teams
+    // a direct, evidence-first overview without leaving the operating-system experience.
+    openApp('recruiter')
+  }, [booted, signedIn, locked, openApp, isRestart])
 
   if (!booted) return <Boot onDone={finishBoot} />
   if (!signedIn || locked) return <LockScreen onUnlock={finishSignIn} />

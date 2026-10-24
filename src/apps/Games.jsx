@@ -23,7 +23,7 @@ export default function Games() {
     <div className="games">
       <header className="games-heading">
         <div className="games-heading-icon" aria-hidden="true">✦</div>
-        <div><p className="game-kicker">SMMSA ARCADE · 4 GAMES</p><h2>Game Center</h2><p>Take a quick break. Your best scores stay on this device.</p></div>
+        <div><p className="game-kicker">SMMSA ARCADE · 4 GAMES</p><h2>Game Center</h2><p>Personal bests saved locally.</p></div>
       </header>
       <div className="games-tabs" role="tablist" aria-label="Choose a game">
         {ARCADE_GAMES.map((game) => (
@@ -39,7 +39,7 @@ export default function Games() {
             onClick={() => setTab(game.id)}
             onKeyDown={(event) => {
               const current = ARCADE_GAMES.findIndex((item) => item.id === game.id)
-              let next = current
+              let next
               if (event.key === 'ArrowRight') next = (current + 1) % ARCADE_GAMES.length
               else if (event.key === 'ArrowLeft') next = (current - 1 + ARCADE_GAMES.length) % ARCADE_GAMES.length
               else if (event.key === 'Home') next = 0

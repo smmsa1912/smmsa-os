@@ -213,7 +213,7 @@ export default function FileExplorer() {
             ) : selected && selected.type === 'folder' ? (
               <div className="explorer-preview-empty"><strong>{selected.name}</strong><span>Folder · {files.filter((item) => item.parentId === selected.id).length} items</span><button type="button" onClick={() => goTo(selected.id)}>Open folder →</button></div>
             ) : (
-              <div className="explorer-preview-empty"><strong>Choose a file</strong><span>Select an item to preview it, or double-click a folder to open it.</span></div>
+              <div className="explorer-preview-empty"><strong>Choose a file</strong></div>
             )}
           </div>
         </section>

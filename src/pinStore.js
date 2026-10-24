@@ -2,7 +2,7 @@ import { appMeta } from './appMeta.js'
 
 export const PIN_KEY = 'smmsa-pinned-apps-v1'
 export const PIN_CHANGE_EVENT = 'smmsa-pins-change'
-export const DEFAULT_PINS = ['quick', 'projects', 'papers', 'resume', 'skills', 'contact']
+export const DEFAULT_PINS = ['recruiter', 'projects', 'resume', 'skills', 'papers', 'contact']
 
 export function loadPinnedApps() {
   try {
@@ -11,8 +11,11 @@ export function loadPinnedApps() {
       const valid = [...new Set(value.filter((id) => appMeta[id]))]
       // Migrate the previous seven-item default layout so its third row no longer
       // gets clipped into the Recent section. Custom pin sets remain untouched.
-      const oldDefaults = ['quick', 'projects', 'papers', 'resume', 'skills', 'contact', 'terminal']
-      if (valid.length === oldDefaults.length && oldDefaults.every((id, index) => valid[index] === id)) return DEFAULT_PINS
+      const oldDefaultSets = [
+        ['quick', 'projects', 'papers', 'resume', 'skills', 'contact', 'terminal'],
+        ['quick', 'projects', 'papers', 'resume', 'skills', 'contact'],
+      ]
+      if (oldDefaultSets.some((oldDefaults) => valid.length === oldDefaults.length && oldDefaults.every((id, index) => valid[index] === id))) return DEFAULT_PINS
       return valid
     }
   } catch {

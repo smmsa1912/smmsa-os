@@ -6,7 +6,7 @@ export default function About() {
 
   return (
     <article className="about-app doc">
-      <p className="portfolio-kicker">ABOUT / THE PERSON BEHIND THE DESKTOP</p>
+      <p className="portfolio-kicker">ABOUT ANDREW</p>
       <h2>Hi, I&apos;m {profile.name}.</h2>
       <p className="lead">{profile.tagline}</p>
       <div className="about-intro-card">

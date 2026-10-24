@@ -1,3 +1,4 @@
+import RecruiterDesk from './RecruiterDesk'
 import About from './About'
 import Projects from './Projects'
 import Resume from './Resume'
@@ -13,6 +14,7 @@ import Publications from './Publications'
 import PortfolioAssistant from './PortfolioAssistant'
 
 export const appComponents = {
+  recruiter: RecruiterDesk,
   about: About,
   projects: Projects,
   explorer: FileExplorer,

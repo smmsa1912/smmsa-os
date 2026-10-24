@@ -42,10 +42,8 @@ export default function LockScreen({ onUnlock }) {
           <button type="button" className="lock-signin" onClick={(event) => { event.stopPropagation(); onUnlock() }}>
             Enter portfolio <span aria-hidden="true">→</span>
           </button>
-          <small>Interactive demo · no account needed</small>
         </div>
       </section>
-      <div className="lock-footer"><span>Click anywhere or press Enter to explore</span><span>◖)) &nbsp; ◆</span></div>
     </main>
   )
 }

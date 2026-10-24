@@ -1,5 +1,67 @@
 # Changelog
 
+## v37 — lint fixes
+
+- Removed render-time ref plumbing from RecruiterLanding's command palette; it now focuses the search input after opening and uses direct section IDs for scrolling, avoiding React's `react-hooks/refs` false-positive path.
+- Simplified Game Center's arrow-key destination calculation so `next` is assigned only for handled keys.
+- Removed the unused error binding from the assistant's safe fallback catch block.
+- Replaced consecutive literal spaces in regexes with counted quantifiers, resolving both `no-regex-spaces` findings before running `--fix`.
+
+### Verification
+- `npm run test`: 93 tests passed.
+- TypeScript parser check: 57 JavaScript/JSX/test files parsed with zero syntax errors.
+- Full ESLint and production build could not be run here because `npm ci` timed out while fetching dependencies. Please run `npm run lint` and `npm run build` locally before pushing.
+
+## v36 — concise UI copy
+
+- Removed redundant explainer paragraphs from Recruiter Desk, Portfolio Home, About, Contact, Skills, Publications, Settings, and assistant setup.
+- Tightened the recruiter tour to short labels and one-line summaries.
+- Simplified game, file-explorer, startup, and empty-state hints while preserving necessary controls and accessibility labels.
+- Kept substantive project summaries, architecture caveats, local-AI disclosures, and evidence/limitations intact.
+- Added regression coverage for the shorter copy and retained navigation.
+
+### Verification
+- `npm run test`: 93 tests passed.
+- Static TypeScript parser check: 60 JavaScript/JSX/test files parsed with zero syntax errors; PostCSS parsed all 4 stylesheets.
+- Production build and ESLint remain unverified because local project dependencies are unavailable in this environment. Run `npm ci`, `npm run lint`, and `npm run build` locally before pushing to Cloudflare Pages.
+
+## v35 — Recruiter Desk inside the OS
+
+- Added Recruiter Desk as a first-class desktop app and made it the first desktop icon, a default Start-menu pin, and a persistent taskbar shortcut.
+- Recruiter Desk opens automatically over the desktop and gives hiring teams a 30-second overview: current experience, education, publications, selected projects, technical areas, resume PDF, email, GitHub and LinkedIn.
+- Selected-project cards open the matching in-OS case study; shortcuts navigate to Skills, Publications, Background, Ask My Portfolio and the 90-second guided tour without leaving SMMSA-OS.
+- Removed the separate recruiter landing page from the primary navigation so the recruiter flow stays inside the OS; the OS remains visible and explorable behind the Recruiter Desk window.
+- Added responsive styling and regression coverage for desktop/start/taskbar discovery, default app routing, evidence links and featured project selection.
+
+### Verification
+- `npm run test`: 92 tests passed.
+- TypeScript parser check: 57 JavaScript/JSX/test files parsed with zero syntax errors; PostCSS parsed all 4 stylesheets.
+- Production Vite build and ESLint could not run because Vite and ESLint are not installed in this environment. Run `npm ci`, `npm run lint`, and `npm run build` locally before pushing to Cloudflare Pages.
+
+## v34 — OS-first recruiter welcome and guided tour
+
+- Restored the retro desktop as the default first impression; the Welcome window opens over the desktop so visitors see the OS and the essential portfolio information together.
+- Removed the simulated first-visit sign-in hurdle while keeping the manual Lock/Restart interactions available inside the desktop.
+- Added a guided recruiter tour that walks through Projects (OSCAR selected), Skills, Publications, Resume, and Contact without leaving the OS. Windows created by the tour are cleaned up as it advances, while pre-existing visitor windows are preserved.
+- Added a visible 90-second tour prompt in Portfolio Home and retained the conventional recruiter view as an explicit taskbar option.
+- Renamed Portfolio Home to Welcome in app chrome and added coverage for OS-first startup, tour routing, and the alternate recruiter view.
+
+### Verification
+- `npm run test`: 91 tests passed.
+- Static TypeScript parser check: 59 JavaScript/JSX/config/test files parsed with zero syntax errors; PostCSS parsed all 4 stylesheets.
+- Production Vite build and ESLint remain unverified in this environment because dependencies are not installed; run the commands locally before pushing to trigger Cloudflare Pages.
+
+## v33 — Recruiter-first portfolio
+
+- Added a polished public landing page as the default entry point, so visitors reach the introduction, resume, selected work, experience, skills, research, and contact without booting into the retro desktop first.
+- Kept the complete SMMSA-OS experience optional behind a clear launch button, with a taskbar shortcut to return to the recruiter view.
+- Added project case-study dialogs using the existing documented project data, workflow, stack, measurements, links, publications, and scope caveats.
+- Added searchable keyboard navigation with Ctrl/Cmd+K, arrow-key selection, Enter to open, and Escape to close.
+- Added responsive mobile navigation, direct resume/email/GitHub/LinkedIn links, visible focus states, and reduced-motion/transparency support.
+- Updated title, canonical URL, theme color, and social metadata for the public portfolio domain.
+- Added regression tests for recruiter-first entry, navigation, project detail preservation, and responsive accessibility.
+
+
 ## v32 — SMMSA Arcade Game Center
 
 - Reworked the Games app into a polished Game Center with four game tabs, quick tips, clearer score panels, keyboard/touch affordances, and responsive retro styling.

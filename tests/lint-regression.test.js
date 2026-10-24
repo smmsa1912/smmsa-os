@@ -7,7 +7,7 @@ const source = async (path) => readFile(new URL(path, import.meta.url), 'utf8')
 test('restart remounts the session controller instead of synchronously resetting state in an effect', async () => {
   const app = await source('../src/App.jsx')
   assert.match(app, /<AppSession key=\{restartCount\} isRestart=\{restartCount > 0\} \/>/)
-  const effects = [...app.matchAll(/useEffect\(\(\) => \{([\s\S]*?)\n  \}, \[[^\]]*\]\)/g)].map((match) => match[1])
+  const effects = [...app.matchAll(/useEffect\(\(\) => \{([\s\S]*?)\n {2}\}, \[[^\]]*\]\)/g)].map((match) => match[1])
   assert.ok(effects.length > 0, 'expected effects to be present')
   for (const effect of effects) {
     assert.doesNotMatch(effect, /setBooted\(|setSignedIn\(/, 'effects should not synchronously reset session state')

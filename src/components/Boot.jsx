@@ -2,12 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 const LINES = [
   'SMMSA-OS PORTFOLIO BUILD',
-  'Checking system memory.... OK',
-  'Loading portfolio profile.. OK',
-  'Loading sandboxed demo files. OK',
-  'Loading desktop shell..... OK',
-  'Starting window manager... OK',
-  'Preparing portfolio desktop. OK',
+  'Loading profile........ OK',
+  'Starting desktop....... OK',
 ]
 
 export default function Boot({ onDone }) {
@@ -53,14 +49,13 @@ export default function Boot({ onDone }) {
             <div key={line}>{line}</div>
           ))}
         </div>
-        <div className="boot-progress-copy"><span>Starting your session</span><span>{filled * 5}%</span></div>
+        <div className="boot-progress-copy"><span>SMMSA-OS</span><span>{filled * 5}%</span></div>
         <div className="boot-bar" aria-hidden="true">
           {Array.from({ length: 20 }, (_, i) => (
             <span key={i} className={i < filled ? 'on' : ''} />
           ))}
         </div>
         <button type="button" className="boot-skip" onClick={(event) => { event.stopPropagation(); finishOnce() }}>Skip startup →</button>
-        <small className="boot-note">Press any key to continue</small>
       </div>
     </main>
   )

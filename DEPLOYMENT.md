@@ -11,7 +11,7 @@ npm run build
 npm run preview
 ```
 
-Open the local preview URL printed by Vite. On a fresh browser profile, confirm Portfolio Home opens only on the first visit; refresh and sign in again to confirm it does not automatically reopen. Verify Home, Projects, Skills, Resume, Publications and Contact, test window sizing/restore, check that the Start Menu pinned grid does not overlap Recent, open every configured external link, download the included PDF resume, and test on a narrow/mobile viewport (e.g. 320px, 375px, 390px wide and landscape), swipe the taskbar app switcher and project filters, use Explorer quick access, and verify the system safe-area spacing on a notched phone.
+Open the local preview URL printed by Vite. Confirm that the retro desktop appears first after the short boot animation and the Welcome window opens on top without a simulated sign-in click. Start the 90-second recruiter tour and verify that it moves through Projects (OSCAR selected), Skills, Publications, Resume, and Contact while the tour panel stays visible. Test Skip/Escape, the Welcome window's direct resume/contact actions, and the taskbar's Recruiter View switch. Then test window sizing/restore, Start Menu, games, Ask My Portfolio, and the desktop's direct app icons. Check narrow mobile viewports (320px, 375px, 390px and landscape), resume PDF access, touch targets, and notched-phone safe areas.
 
 ## 2. Review public information
 
@@ -23,19 +23,26 @@ Before making the portfolio public, review `src/data.js` and `public/resume.pdf`
 - Replace `public/resume.pdf` with the final public resume if it has changed.
 - Do not include API keys, credentials, private client data or sensitive screenshots.
 
-## 3. Deploy with Vercel
+## 3. Deploy with Cloudflare Pages
 
-1. Push this project to a GitHub repository you control.
-2. In Vercel, choose **Add New → Project** and import that repository.
-3. Confirm the framework is **Vite**, the install command is `npm ci`, the build command is `npm run build`, and the output directory is `dist`. These defaults are also written in `vercel.json`.
-4. Deploy the preview and test its Home, project links, PDF download and mobile layout before assigning a production domain.
+This project is configured for a static Pages deployment.
 
-Alternatively, after installing the dependencies, run `npx vercel` in this directory and follow the prompts to log in and choose/create a project. Use `npx vercel --prod` only when you intend to publish the current version to production.
+1. Push the project to the GitHub repository connected to your Cloudflare Pages project.
+2. In **Workers & Pages → your Pages project → Settings → Builds & deployments**, use `npm run build` for the build command and `dist` for the output directory. No environment variables are required for the static portfolio.
+3. Keep the production branch set to the repository's actual default branch (often `main`).
+4. When the build succeeds, test the `*.pages.dev` project URL first. Then add `andrewneil.dev` in the Pages project's **Custom domains** screen and follow Cloudflare's record/activation prompts.
+5. Test HTTPS, resume PDF, project links, mobile navigation, optional local AI (WebGPU browser), and all games before sharing the production URL.
 
-## 4. Netlify alternative
+Do not add a duplicate DNS record if Cloudflare Pages has already created the required record. Leave existing DNS and nameserver settings alone unless Cloudflare's custom-domain status specifically asks for a change.
+
+## 4. Vercel alternative
+
+Vercel settings remain in `vercel.json`: install `npm ci`, build with `npm run build`, output directory `dist`. Import the repository in Vercel or run `npx vercel` after logging in if you choose to host there instead.
+
+## 5. Netlify alternative
 
 Build with `npm ci && npm run build`, then deploy the generated `dist/` directory. The `public/_redirects` file supplies the SPA fallback.
 
-## Hosting status
+## Current project status
 
-This source bundle is deployment-ready, but it does not contain a live deployment URL. No existing Vercel project or accessible GitHub repository was available in the current connected-account checks, and the local dependency installation timed out in this environment, so the production build could not be run here. Verify the build in your local environment or the hosting provider before promoting to production.
+The project is already deployed through Cloudflare Pages in the existing setup. This source package contains the OS-first welcome and guided-tour update; it is not automatically pushed to the connected GitHub repository. After copying these changes into the repo and pushing them, check the Pages build log and verify both the stable `pages.dev` URL and custom domain. Build and lint should be confirmed by Cloudflare or in the developer's local environment before treating this revision as production-verified.

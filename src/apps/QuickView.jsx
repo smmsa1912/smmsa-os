@@ -5,6 +5,7 @@ const getSkillCount = () => Object.values(skills).reduce((total, group) => total
 
 export default function QuickView() {
   const openApp = useOS((s) => s.openApp)
+  const startRecruiterTour = useOS((s) => s.startRecruiterTour)
   const setSelectedProject = useOS((s) => s.setSelectedProject)
   const featuredProjects = projects.slice(0, 3)
   const currentRole = experience[0]
@@ -19,14 +20,13 @@ export default function QuickView() {
             <h1>Hey, I&apos;m <span>{profile.name}.</span></h1>
             <p className="portfolio-role">{profile.role} · Class of {profile.grad}</p>
             <p className="portfolio-tagline">{profile.tagline}</p>
-            <p className="portfolio-intro">
-              I build practical software—from tool-using AI agents and desktop automation to Python backends and computer-vision prototypes. This desktop is a hands-on way to explore my work.
-            </p>
             <div className="portfolio-actions">
-              <button type="button" className="portfolio-btn primary" onClick={() => openApp('projects')}>Explore projects <span aria-hidden="true">↗</span></button>
-              <button type="button" className="portfolio-btn" onClick={() => openApp('resume')}>View resume</button>
-              <button type="button" className="portfolio-btn quiet" onClick={() => openApp('contact')}>Contact me</button>
-              <button type="button" className="portfolio-btn ai-entry" onClick={() => openApp('assistant')}>Ask my portfolio ✦</button>
+              <button type="button" className="portfolio-btn primary" onClick={() => openApp('recruiter')}>Recruiter Desk <span aria-hidden="true">→</span></button>
+              <button type="button" className="portfolio-btn" onClick={startRecruiterTour}>90-sec tour</button>
+              <button type="button" className="portfolio-btn" onClick={() => openApp('projects')}>Projects <span aria-hidden="true">↗</span></button>
+              <button type="button" className="portfolio-btn" onClick={() => openApp('resume')}>Resume</button>
+              <button type="button" className="portfolio-btn quiet" onClick={() => openApp('contact')}>Contact</button>
+              <button type="button" className="portfolio-btn ai-entry" onClick={() => openApp('assistant')}>Ask AI ✦</button>
             </div>
           </div>
           <aside className="portfolio-id-card" aria-label="Profile summary">
@@ -47,6 +47,7 @@ export default function QuickView() {
         </div>
       </section>
 
+
       <section className="portfolio-stats" aria-label="Portfolio at a glance">
         <div><strong>{projects.length.toString().padStart(2, '0')}</strong><span>PROJECTS</span></div>
         <div><strong>{publications.length.toString().padStart(2, '0')}</strong><span>PUBLICATIONS</span></div>
@@ -66,7 +67,7 @@ export default function QuickView() {
               <strong>{project.name}</strong>
               <span className="portfolio-project-summary">{project.summary}</span>
               <span className="portfolio-project-tags">{project.tags.slice(0, 2).join(' · ')}</span>
-              <span className="portfolio-project-open">Explore case study <span aria-hidden="true">↗</span></span>
+              <span className="portfolio-project-open">Case study <span aria-hidden="true">↗</span></span>
             </button>
           ))}
         </div>
@@ -78,21 +79,19 @@ export default function QuickView() {
           <strong>{publications[0]?.title}</strong>
           <span>{publications[0]?.where} · plus two KYC Smart Card papers</span>
         </div>
-        <button type="button" className="portfolio-text-button" onClick={() => openApp('papers')}>Browse publications ↗</button>
+        <button type="button" className="portfolio-text-button" onClick={() => openApp('papers')}>Publications ↗</button>
       </section>
 
       <section className="portfolio-bottom-row">
         <div className="portfolio-bottom-card">
           <p className="portfolio-kicker">THE TOOLBOX</p>
-          <h2>Curious by default.</h2>
-          <p>AI and automation, ML/computer vision, and dependable backend systems.</p>
-          <button type="button" className="portfolio-text-button" onClick={() => openApp('skills')}>Browse skills ↗</button>
+          <h2>Skills & tools</h2>
+          <button type="button" className="portfolio-text-button" onClick={() => openApp('skills')}>Skills ↗</button>
         </div>
         <div className="portfolio-bottom-card portfolio-contact-card">
           <p className="portfolio-kicker">HAVE SOMETHING IN MIND?</p>
-          <h2>Let&apos;s build something useful.</h2>
-          <p>For internships, collaboration, or a good technical conversation.</p>
-          <button type="button" className="portfolio-text-button" onClick={() => openApp('contact')}>Get in touch ↗</button>
+          <h2>Contact</h2>
+          <button type="button" className="portfolio-text-button" onClick={() => openApp('contact')}>Contact ↗</button>
         </div>
       </section>
       <footer className="portfolio-home-footer">

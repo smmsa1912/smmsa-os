@@ -1,6 +1,20 @@
 // Pixel art as text. Each character is one pixel; '.' is transparent.
 // k ink, y yellow, Y dark yellow, w paper, b blue, g green, p pink, r grey, d dark screen
 export const ICONS = {
+  briefcase: [
+    '....kkkk....',
+    '...kYYYYk...',
+    '..kkkkkkkk..',
+    '.kbbbbbbbbk.',
+    'kbbbbbbbbbbk',
+    'kbbkbbbbkbbk',
+    'kbbkbbbbkbbk',
+    'kbbbbbbbbbbk',
+    'kbbbbbbbbbbk',
+    '.kkkkkkkkkk.',
+    '............',
+    '............',
+  ],
   folder: [
     '............',
     '.kkkk.......',

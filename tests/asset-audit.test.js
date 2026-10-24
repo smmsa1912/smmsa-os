@@ -53,7 +53,7 @@ test('publication destinations and project repositories have no placeholder host
 
 test('site has a title, description, viewport-fit metadata, and bundled favicon', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8')
-  assert.match(html, /<title>Andrew Neil — SMMSA-OS Portfolio<\/title>/)
+  assert.match(html, /<title>Andrew Neil — Developer Portfolio<\/title>/)
   assert.match(html, /name="description" content="[^"]+"/)
   assert.match(html, /viewport-fit=cover/)
   assert.ok(await pathExists(new URL('favicon.svg', publicRoot)))
