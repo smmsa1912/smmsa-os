@@ -37,7 +37,7 @@ export const experience = [
     id: '41studio',
     role: 'Backend Engineer Intern',
     org: '41studio',
-    when: 'Aug 2026 to present',
+    when: 'Jul 2026 to Oct 2026',
     tech: ['Python', 'Django', 'Relational databases'],
     points: [
       'Contributing to a Django-based ERP for a polytechnic college, covering student records and academic administration for department heads, teachers, classes and students.',
