@@ -3,13 +3,13 @@
 export const profile = {
   name: 'Andrew Neil',
   handle: 'smmsa1912',
-  role: 'Computer Engineering student',
+  role: 'AI Engineer · Agentic Systems & Backend Engineering',
   school: 'Xavier Institute of Engineering, Mumbai',
   grad: 2027,
-  tagline: 'AI engineering, agentic automation and Python backend.',
+  tagline: 'Building reliable AI agents, tool-driven automation and Python backend systems.',
   bio: [
-    'I study Computer Engineering at Xavier Institute of Engineering in Mumbai (class of 2027) and work as a backend intern at 41studio.',
-    'I build tool-using AI systems, Django backends and computer-vision prototypes. My main project, OSCAR, turns plain-language tasks into actions across the browser, the desktop and the terminal.',
+    'I am a Computer Engineering student at Xavier Institute of Engineering, Mumbai (2027) focused on agentic AI, AI engineering and backend systems. I have professional backend-internship experience building Django workflows and freelance experience delivering Python automation projects.',
+    'I build practical, tool-using AI systems with an emphasis on reliable execution, evaluation and human-verifiable outcomes. My work spans OSCAR, a Windows-first desktop and browser automation agent; TradeAssist, a quantitative research and backtesting system; and fintech, IoT and computer-vision prototypes.',
   ],
   github: 'https://github.com/smmsa1912',
   email: 'andrewneil1912@gmail.com',
@@ -18,10 +18,12 @@ export const profile = {
 }
 
 export const highlights = [
-  'Backend Engineer Intern at 41studio (since August 2026)',
-  'Three papers published in IJIRT (December 2024, June 2025, 2026)',
-  'Won the college mini-project competition with the Dynamic Toll Charging System',
-  'Three fixed-price Upwork contracts completed, two five-star reviews',
+  'Agentic AI and backend engineering portfolio focused on Python, tool calling and reliable automation',
+  'Backend Engineer Intern at 4iStudio — Django workflows for a college ERP',
+  'Passed Handshake AI Project Maser / Project Hertz technical assessment (CodeSignal)',
+  'Three IJIRT publications across KYC Smart Card and Dynamic Toll Charging System',
+  'Competition-winning Dynamic Toll Charging System project',
+  'Freelance Python development experience with completed Upwork contracts and five-star client feedback',
 ]
 
 export const education = {
@@ -34,26 +36,26 @@ export const education = {
 
 export const experience = [
   {
-    id: '41studio',
+    id: '4istudio',
     role: 'Backend Engineer Intern',
-    org: '41studio',
-    when: 'Jul 2026 to Oct 2026',
+    org: '4iStudio',
+    when: 'Jul 2026 to Nov 2026',
     tech: ['Python', 'Django', 'Relational databases'],
     points: [
-      'Contributing to a Django-based ERP for a polytechnic college, covering student records and academic administration for department heads, teachers, classes and students.',
-      'Working on backend workflows for marks entry, attendance, student data, marksheets and certificates.',
+      'Built and contributed to Django ERP workflows for a polytechnic-college environment, covering student records and academic administration for department heads, teachers, classes and students.',
+      'Worked on backend workflows for marks entry, attendance, student data, marksheets and certificates.',
     ],
   },
   {
     id: 'freelance',
     role: 'Freelance Python Developer',
     org: 'Upwork contracts',
-    when: '2023 to 2025',
-    tech: ['Python', 'Selenium', 'LangChain', 'OpenAI API', 'Claude API', 'SMTP'],
+    when: 'Freelance engagements',
+    tech: ['Python', 'Selenium', 'Browser automation', 'LLM APIs', 'SMTP'],
     points: [
       'Built a website monitor that checked appointment availability and emailed alerts through the client\'s SMTP server.',
       'Created a command-line LLM workflow that generates three response variants, lets the user pick one, and reuses it as context.',
-      'Delivered Selenium browser automation and web scraping. Three fixed-price contracts completed, two five-star reviews.',
+      'Delivered Selenium browser automation and web scraping across completed fixed-price Upwork contracts, earning five-star client feedback.',
     ],
   },
 ]
@@ -65,20 +67,21 @@ export const projects = [
     kind: 'Personal project',
     tags: ['AI agents', 'Automation'],
     summary:
-      'A multi-agent AI assistant for Windows that turns natural-language tasks into workflows across the browser, the desktop and the terminal.',
+      'A Windows-first, local-first vision-powered desktop automation agent with a cloud-planner core. OSCAR translates natural-language goals into structured, tool-executed workflows across browser, desktop UI and terminal environments.',
     points: [
-      'Python orchestration backend with a Flutter desktop interface.',
-      'Screenshot-driven planning and JSON action execution, with separate browser, UI and terminal agents and persistent workflow state.',
-      'Record-and-replay for mouse, keyboard, delays and coordinates.',
-      'Reliability safeguards include fresh observations, bounded retries, outcome checks and duplicate-typing prevention; regression coverage includes mocked Windows API paths.',
+      'Python orchestration backend with a Flutter desktop interface and provider-adapter architecture for hosted and local language models.',
+      'Tool-calling planner routes structured actions to specialized browser, desktop/UI and terminal capabilities while maintaining workflow context.',
+      'Vision-assisted interaction combines screenshots, OCR and UI observations with Playwright browser automation and desktop input control.',
+      'Includes keyboard/mouse recording and replay, bounded retries, fresh observations, action validation, outcome checks and duplicate-action safeguards.',
+      'Regression suite reached 243 passing tests, covering core workflows and mocked Windows API paths.',
     ],
     workflow: [
       { title: 'Describe a task', detail: 'The user provides a goal in natural language.' },
-      { title: 'Plan and route', detail: 'The planner produces structured actions that are routed to the browser, desktop UI or terminal agent.' },
-      { title: 'Observe and act', detail: 'Agents use browser actions or screenshot-driven desktop interaction to carry out the workflow.' },
-      { title: 'Check the result', detail: 'Fresh observations, bounded retries and outcome checks help prevent repeated or ineffective actions.' },
+      { title: 'Plan and route', detail: 'The planner generates validated structured tool calls and routes each action to the relevant browser, desktop or terminal capability.' },
+      { title: 'Observe and act', detail: 'Specialized agents execute browser and desktop actions using current observations, screenshots and supported tools.' },
+      { title: 'Check the result', detail: 'The system verifies outcomes, refreshes observations and applies bounded retries to reduce duplicate or ineffective actions.' },
     ],
-    scopeNote: 'Windows-first local automation prototype. Reliability still depends on the target application, its current state and the actions available to the agent.',
+    scopeNote: 'Windows-first, local-first engineering project. It is an actively developed automation system, not a guarantee of autonomous success in every application; execution quality depends on application state, permissions, model output and available tools.',
     diagrams: [
       {
         src: '/diagrams/oscar-system-architecture.svg',
@@ -89,7 +92,19 @@ export const projects = [
         sourceLinkLabel: 'View repository',
       },
     ],
-    stack: ['Python', 'Flutter', 'Gemini', 'Local LLMs', 'Playwright', 'PyAutoGUI', 'YOLOv8', 'OCR', 'pytest'],
+    stack: [
+      'Python',
+      'Flutter',
+      'Gemini API',
+      'OpenAI-compatible APIs',
+      'Ollama',
+      'OmniRoute',
+      'Playwright',
+      'PyAutoGUI',
+      'YOLOv8',
+      'OCR',
+      'pytest',
+    ],
     repo: 'https://github.com/smmsa1912/OSCAR',
     demo: null,
   },
@@ -99,10 +114,10 @@ export const projects = [
     kind: 'Personal project',
     tags: ['Quant research', 'Risk'],
     summary:
-      'A research and risk-management system for Indian equities: a market-data pipeline and a backtesting engine with realistic costs.',
+      'A Python-based quantitative research and risk-analysis platform for Indian equities, combining historical market-data workflows, strategy evaluation and cost-aware backtesting.',
     points: [
       'Backtesting covers technical indicators, entry and exit signals, brokerage costs, slippage, stop-losses and trailing stops.',
-      'Risk controls and portfolio analysis: position sizing, exposure limits, P&L, equity curves, max drawdown, Sharpe ratio, win rate and profit factor, plus walk-forward testing.',
+      'Risk and portfolio analysis includes position sizing, exposure limits, P&L, equity curves, maximum drawdown, Sharpe ratio, win rate and profit factor, with walk-forward evaluation.',
       'Best recorded run: IRFC, SMA 20/50 crossover, 5% stop-loss, Jan 2023 to Sep 2026. +24.17% cumulative return, 6.75% CAGR, -11.03% max drawdown over 86 trades. Backtest results only, not a claim of live profit.',
     ],
     workflow: [
@@ -128,28 +143,37 @@ export const projects = [
         sourceLabel: 'Portfolio / resume description and recorded backtest notes; high-level, not source-code-verified',
       },
     ],
-    stack: ['Python', 'Angel One SmartAPI', 'Pandas', 'NumPy', 'pandas-ta', 'Parquet', 'scikit-learn', 'PyTorch'],
+    stack: [
+      'Python',
+      'Angel One SmartAPI',
+      'Pandas',
+      'NumPy',
+      'pandas-ta',
+      'Parquet',
+      'scikit-learn',
+    ],
     repo: null,
     demo: null,
   },
   {
     id: 'finverse',
-    name: 'FinVerse',
-    kind: 'Final-year project',
-    tags: ['Fintech', 'Blockchain'],
+    name: 'FinVerse 2.0',
+    kind: 'Final-year project · In development',
+    tags: ['Agentic fintech', 'B2B payments', 'Blockchain', 'IoT'],
     summary:
-      'An AI-powered blockchain financial platform prototype: web dashboard, Django backend, mobile app and ESP32/NFC hardware authentication.',
+      'A next-generation B2B payment-gateway research prototype for the AI era, exploring machine-to-machine agentic commerce through a web dashboard, backend services, an AI copilot and an ESP32-based authentication terminal.',
     points: [
-      'Connects the financial and authentication parts into one end-to-end prototype.',
-      'A prototype, not a deployed commercial product.',
+      'Explores payment workflows initiated by users and software agents, with an AI copilot intended to assist with financial operations.',
+      'Combines a React 19/Vite dashboard, Django/Python backend direction and an ESP32-S3 terminal concept using NFC-based interaction.',
+      'The architecture explores blockchain-backed auditability and hardware-assisted authentication; it remains a student prototype under active development, not a live payment network.',
     ],
     workflow: [
-      { title: 'Start a financial action', detail: 'The web dashboard or mobile app provides the user-facing entry point.' },
-      { title: 'Handle application logic', detail: 'The Django backend coordinates the prototype’s financial and authentication workflows.' },
-      { title: 'Authenticate the interaction', detail: 'The ESP32/NFC hardware path is intended to add a physical authentication step.' },
-      { title: 'Connect the components', detail: 'The project explores a combined financial platform across web, mobile, blockchain and IoT components.' },
+      { title: 'Initiate a payment workflow', detail: 'A business user or authorized software agent starts a payment-related workflow through the dashboard or integration layer.' },
+      { title: 'Evaluate and orchestrate', detail: 'Backend services coordinate business rules, payment workflow state and the AI-copilot experience.' },
+      { title: 'Authenticate the request', detail: 'The ESP32/NFC terminal concept explores a hardware-backed user or device authentication step.' },
+      { title: 'Record and reconcile', detail: 'The prototype explores blockchain metadata anchoring and financial workflow records; it does not claim production-grade settlement.' },
     ],
-    scopeNote: 'Final-year prototype under development. Do not describe it as a production payment gateway or imply that all planned integrations are commercially deployed.',
+    scopeNote: 'Final-year project in development. The agentic-commerce and B2B payment-gateway direction is a prototype/research target; do not describe it as a production payment gateway or imply that all planned integrations are deployed.',
     implementationCaveats: [
       'Known firmware/backend authentication mismatch: the supplied terminal firmware sends a static API-key header, while the backend endpoint requires timestamped HMAC authentication and a nonce; terminal/backend interoperability is not validated until this interface mismatch is resolved.',
       'The supplied NFC path reads a MIFARE Classic payload using the default MIFARE Classic key, so card anti-cloning resistance is not established.',
@@ -164,20 +188,31 @@ export const projects = [
         sourceLabel: 'FinVerse IEEE manuscript and major-project report (October 2026)',
       },
     ],
-    stack: ['React', 'Tailwind CSS', 'Django', 'Flutter', 'Python', 'Blockchain', 'ESP32', 'NFC/RFID'],
+    stack: [
+      'React 19',
+      'Vite',
+      'Tailwind CSS v4',
+      'Django',
+      'Python',
+      'Solidity',
+      'Hardhat',
+      'ESP32-S3',
+      'ATECC608A',
+      'PN532 NFC',
+    ],
     repo: null,
     demo: null,
   },
   {
     id: 'toll-system',
     name: 'Dynamic Toll Charging System',
-    kind: 'College mini-project, competition winner',
+    kind: 'Competition-winning project',
     tags: ['Computer vision', 'IoT'],
     summary:
       'A tollgate demonstration that detects vehicles, reads number plates and identifies them by RFID, charging a dummy wallet.',
     points: [
       'Combines YOLOv8 vehicle detection, OCR/ANPR plate recognition and RFID identification.',
-      'Won the college mini-project competition and led to a co-authored IJIRT paper (2026).',
+      'Won the institute project competition and was developed into a co-authored IJIRT paper (2026).',
       'RFID simulated FASTag. Real payment processing was not implemented.',
     ],
     workflow: [
@@ -188,7 +223,7 @@ export const projects = [
     ],
     scopeNote: 'Competition-winning college prototype. RFID simulates FASTag, and real payment processing is outside the project scope.',
     stack: ['Python', 'YOLOv8', 'OpenCV', 'OCR/ANPR', 'RFID'],
-    repo: null,
+    repo: 'https://github.com/smmsa1912/Tollgate-Project',
     demo: null,
     paperIds: ['toll-paper'],
     diagrams: [
@@ -203,7 +238,7 @@ export const projects = [
   {
     id: 'kyc-smartcard',
     name: 'KYC Smart Card',
-    kind: 'Academic mini-project',
+    kind: 'Personal / academic project',
     tags: ['IoT', 'Security'],
     summary:
       'A DigiLocker-inspired platform for storing and sharing documents with institutions, with RFID smartcard verification and mobile/Bluetooth authentication.',
@@ -270,9 +305,54 @@ export const publications = [
 ]
 
 export const skills = {
-  Languages: ['Python', 'JavaScript/TypeScript', 'SQL', 'C/C++'],
-  'AI and automation': ['LLM APIs (Gemini, OpenAI, Claude)', 'Local LLMs', 'Agent/tool calling', 'LangChain', 'Playwright', 'Selenium', 'PyAutoGUI'],
-  'ML and vision': ['Pandas', 'NumPy', 'scikit-learn', 'PyTorch', 'OpenCV', 'YOLOv8', 'OCR'],
-  'Backend and data': ['Django', 'FastAPI', 'REST APIs', 'Relational databases', 'Parquet', 'pytest'],
-  'Tools and systems': ['Git/GitHub', 'Linux/CLI', 'Flutter', 'React', 'Tailwind CSS', 'ESP32', 'RFID', 'JWT'],
+  Languages: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'C/C++', 'Dart'],
+  'Agentic AI and LLM engineering': [
+    'LLM APIs (Gemini, OpenAI, Claude, OmniRoute)',
+    'Local LLMs (Ollama)',
+    'Tool calling',
+    'Agent orchestration',
+    'LangChain',
+    'LangGraph',
+    'Prompt and workflow evaluation',
+    'RAG fundamentals'
+  ],
+  'Automation and computer use': [
+    'Playwright',
+    'Selenium',
+    'PyAutoGUI',
+    'Computer-use workflows',
+    'Browser automation',
+    'OCR',
+  ],
+  'ML and computer vision': [
+    'Pandas',
+    'NumPy',
+    'scikit-learn',
+    'PyTorch',
+    'OpenCV',
+    'YOLOv8',
+    'ANPR',
+  ],
+  'Backend and data': [
+    'Django',
+    'FastAPI',
+    "Selenium",
+    'REST APIs',
+    'Relational databases',
+    'Parquet',
+    'pytest',
+  ],
+  'Tools and systems': [
+    'Git/GitHub',
+    'Linux/CLI',
+    'Flutter',
+    'React 19',
+    'Vite',
+    'Tailwind CSS',
+    'Docker',
+    'ESP32',
+    'RFID/NFC',
+    'JWT',
+    'Hardhat',
+  ],
 }
