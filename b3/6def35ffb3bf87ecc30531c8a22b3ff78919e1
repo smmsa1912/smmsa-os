@@ -1,0 +1,48 @@
+src/appMeta.js
+  s_cdc72464876892::t_c6864811318ce0 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "3.9.1",
+  "base_commit_sha": "b36def35ffb3bf87ecc30531c8a22b3ff78919e1",
+  "branch": "test/autter-pr-check",
+  "prompts": {
+    "s_cdc72464876892": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "9136ef69-6971-4525-bd31-f1dbd6f69f44",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "smmsa1912 <andrewneil1912@gmail.com>",
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  },
+  "sessions": {
+    "s_cdc72464876892": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "9136ef69-6971-4525-bd31-f1dbd6f69f44",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "smmsa1912 <andrewneil1912@gmail.com>",
+      "stats": {
+        "total_additions": 1,
+        "total_deletions": 1,
+        "accepted_lines": 1,
+        "overriden_lines": 0,
+        "files": {
+          "src/appMeta.js": {
+            "total_additions": 1,
+            "total_deletions": 1,
+            "accepted_lines": 1,
+            "overriden_lines": 0
+          }
+        }
+      }
+    }
+  },
+  "integrity": {"v":1,"commit":"b36def35ffb3bf87ecc30531c8a22b3ff78919e1","tree":"3a2781ee1c9d21a459c3cb93e224054c7b03fd77","files":{"src/appMeta.js":"82b10f698f23c426caabf8806a7e85a986307034"},"digest":"8510c608944e570e59cba70148c34f5fd2157a57929cdd3c0250f912899709fe"}
+}
