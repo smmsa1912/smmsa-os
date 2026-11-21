@@ -7,7 +7,7 @@ export const appMeta = {
   resume: { title: 'Resume', label: 'Resume', icon: 'doc', w: 760, h: 660 },
   contact: { title: 'Contact', label: 'Contact', icon: 'mail', w: 680, h: 480 },
   games: { title: 'Game Center', label: 'Games', icon: 'gamepad', w: 620, h: 760 },
-  terminal: { title: 'Terminal', label: 'Terminal', icon: 'terminal', w: 760, h: 520 },
+  terminal: { title: 'Command Center', label: 'Command Center', icon: 'terminal', w: 760, h: 520 },
   quick: { title: 'Welcome to SMMSA-OS', label: 'Welcome', icon: 'start', w: 1020, h: 700 },
   settings: { title: 'Settings', label: 'Settings', icon: 'sliders', w: 700, h: 560 },
   bin: { title: 'Recycle Bin', label: 'Recycle Bin', icon: 'trash', w: 900, h: 700 },
