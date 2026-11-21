@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import './os.css';
 
 :root {
   --ink: #151227;

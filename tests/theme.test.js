@@ -6,7 +6,7 @@ const readSource = (path) => readFile(new URL(path, import.meta.url), 'utf8')
 
 const [store, app, settings, wallpapers, css, svg] = await Promise.all([
   readSource('../src/store.js'),
-  readSource('../src/App.jsx'),
+  readSource('../src/OSExperience.jsx'),
   readSource('../src/apps/Settings.jsx'),
   readSource('../src/wallpapers.js'),
   readSource('../src/os.css'),

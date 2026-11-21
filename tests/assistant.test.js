@@ -7,6 +7,17 @@ import { buildLocalModelContext, buildQuickPortfolioAnswer, contextualizePortfol
 
 const source = (path) => readFile(new URL(path, import.meta.url), 'utf8')
 
+test('research agent is answered as a project, not as published research', () => {
+  for (const answer of [resolveDirectPortfolioAnswer('How does the research agent work?'), buildQuickPortfolioAnswer('Explain Autonomous Research Agent')]) {
+    assert.match(answer.answer, /web search/i)
+    assert.match(answer.answer, /arXiv/)
+    assert.ok(answer.sources.some(item => item.projectId === 'research-agent'))
+  }
+  assert.match(resolveDirectPortfolioAnswer('Research agent benchmark results').answer, /No measured benchmark/)
+  assert.match(resolveDirectPortfolioAnswer('Research agent GitHub repository').answer, /not currently listed/)
+  assert.match(resolveDirectPortfolioAnswer('Which competition award did Andrew win?').answer, /KYC Smart Card.*first place.*April 2025/)
+})
+
 test('Ask My Portfolio is registered as a real desktop app', async () => {
   assert.equal(appMeta.assistant.title, 'Ask My Portfolio')
   assert.equal(appMeta.assistant.icon, 'brain')
@@ -167,9 +178,12 @@ test('portfolio summary, education and career-fit questions are directly answere
 })
 
 test('common technology questions handle categories and project-specific stacks', () => {
-  assert.match(resolveDirectPortfolioAnswer('what programming languages does he know?').answer, /Python, JavaScript\/TypeScript, SQL, C\/C\+\+/)
+  assert.match(resolveDirectPortfolioAnswer('what programming languages does he know?').answer, /Python, JavaScript, TypeScript, SQL, C\/C\+\+/)
   assert.match(resolveDirectPortfolioAnswer('what is the tech stack of OSCAR?').answer, /Python, Flutter, Gemini/i)
-  assert.match(resolveDirectPortfolioAnswer('what are Andrew’s AI skills?').answer, /AI and automation/i)
+  const aiSkills = resolveDirectPortfolioAnswer('what are Andrew’s AI skills?').answer
+  assert.match(aiSkills, /Agentic AI and LLM engineering/i)
+  assert.match(aiSkills, /Tool calling/i)
+  assert.match(aiSkills, /Automation and computer use/i)
 })
 
 test('project questions can ask for limitations, architecture, and metrics', () => {
@@ -197,6 +211,9 @@ test('portfolio navigation commands open desktop apps directly', () => {
   assert.deepEqual(resolvePortfolioNavigationCommand('open skills'), { appTarget: 'skills', label: 'Skills & Tools' })
   assert.deepEqual(resolvePortfolioNavigationCommand('please open my resume'), { appTarget: 'resume', label: 'Resume' })
   assert.deepEqual(resolvePortfolioNavigationCommand('go to publications'), { appTarget: 'papers', label: 'Publications' })
+  assert.deepEqual(resolvePortfolioNavigationCommand('open dashboard'), { appTarget: 'recruiter', label: 'Engineering Dashboard' })
+  assert.deepEqual(resolvePortfolioNavigationCommand('open agent lab'), { appTarget: 'lab', label: 'Agent Execution Lab' })
+  assert.deepEqual(resolvePortfolioNavigationCommand('open copilot'), { appTarget: 'copilot', label: 'Recruiter Copilot' })
   assert.equal(resolvePortfolioNavigationCommand('show me resume PDF'), null)
 })
 
@@ -207,7 +224,8 @@ test('follow-up questions inherit the last cited portfolio topic', () => {
   ])
   assert.match(followUp, /OSCAR/)
   const result = resolveDirectPortfolioAnswer(followUp)
-  assert.match(result.answer, /Windows-first local automation prototype/i)
+  assert.match(result.answer, /Windows-first local automation project/i)
+  assert.match(result.answer, /restricted Stage 3A qualification/i)
 })
 
 test('unverified project details remain scoped and the local prompt supports grounded comparisons', async () => {

@@ -9,6 +9,7 @@ const WEBGPU_AVAILABLE = supportsLocalPortfolioAI()
 const SUGGESTIONS = [
   'Quick profile',
   'OSCAR vs FinVerse',
+  'How does the research agent work?',
   'Best Agentic AI project',
   'FinVerse limitations',
   'Help',

@@ -148,6 +148,7 @@ export default function Projects() {
                 {selectedProject.metricsNote && <p className="project-metrics-note">{selectedProject.metricsNote}</p>}
               </section>
             )}
+            {selectedProject.verification && <section className="project-detail-section"><h3>Recorded verification</h3><p><strong>{selectedProject.verification.value} {selectedProject.verification.label}</strong></p><p>{selectedProject.verification.note}</p></section>}
             <section className="project-detail-section">
               <h3>What I built</h3>
               <ul className="plain project-points">
@@ -170,10 +171,11 @@ export default function Projects() {
                 </div>
               </section>
             )}
-            {selectedProject.scopeNote && (
+            {(selectedProject.scopeNote || selectedProject.implementationCaveats?.length > 0) && (
               <section className="project-scope-note" aria-label="Project scope and limitations">
                 <strong>Scope & caveats</strong>
-                <p>{selectedProject.scopeNote}</p>
+                {selectedProject.scopeNote && <p>{selectedProject.scopeNote}</p>}
+                {selectedProject.implementationCaveats?.length > 0 && <ul className="plain project-points">{selectedProject.implementationCaveats.map(caveat => <li key={caveat}>{caveat}</li>)}</ul>}
               </section>
             )}
             <footer className="project-detail-footer">

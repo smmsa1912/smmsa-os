@@ -21,7 +21,7 @@ export default function QuickView() {
             <p className="portfolio-role">{profile.role} · Class of {profile.grad}</p>
             <p className="portfolio-tagline">{profile.tagline}</p>
             <div className="portfolio-actions">
-              <button type="button" className="portfolio-btn primary" onClick={() => openApp('recruiter')}>Recruiter Desk <span aria-hidden="true">→</span></button>
+              <button type="button" className="portfolio-btn primary" onClick={() => openApp('recruiter')}>Engineering Dashboard <span aria-hidden="true">→</span></button>
               <button type="button" className="portfolio-btn" onClick={startRecruiterTour}>90-sec tour</button>
               <button type="button" className="portfolio-btn" onClick={() => openApp('projects')}>Projects <span aria-hidden="true">↗</span></button>
               <button type="button" className="portfolio-btn" onClick={() => openApp('resume')}>Resume</button>

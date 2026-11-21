@@ -39,6 +39,23 @@ async function resolveLocalImport(fromFile, specifier) {
 
 await walk(sourceRoot)
 
+test('source module basenames do not collide on case-insensitive filesystems', () => {
+  const seen = new Map()
+  for (const filename of sourceFiles.filter(file => /\.(?:js|jsx|ts|tsx)$/.test(file))) {
+    const relative = path.relative(sourceRoot, filename)
+    const key = relative.replace(/\.(?:js|jsx|ts|tsx)$/, '').toLowerCase()
+    assert.ok(!seen.has(key), `Windows resolution collision: ${seen.get(key)} and ${relative}`)
+    seen.set(key, relative)
+  }
+})
+
+test('Agent Lab UI and model imports specify distinct explicit filenames', async () => {
+  const wrapper = await readFile(path.join(sourceRoot, 'apps', 'EngineeringLab.jsx'), 'utf8')
+  const lab = await readFile(path.join(sourceRoot, 'AgentLab.jsx'), 'utf8')
+  assert.match(wrapper, /import AgentLab from ['"]\.\.\/AgentLab\.jsx['"]/)
+  assert.match(lab, /from ['"]\.\/agentLabModel\.js['"]/)
+})
+
 test('all relative source imports resolve to existing files', async () => {
   const missing = []
   for (const filename of sourceFiles) {

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://andrewneil.dev/sitemap.xml

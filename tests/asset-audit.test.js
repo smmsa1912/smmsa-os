@@ -22,7 +22,7 @@ test('portfolio profile points to real-looking public HTTPS destinations', () =>
 
 test('all portfolio diagram assets and resume are packaged locally', async () => {
   const diagramPaths = projects.flatMap((project) => (project.diagrams ?? []).map((diagram) => diagram.src))
-  assert.equal(diagramPaths.length, 6)
+  assert.equal(diagramPaths.length, 7)
   for (const assetPath of [...diagramPaths, profile.resume]) {
     assert.ok(assetPath.startsWith('/'), `${assetPath} should be a root-relative public asset`)
     assert.ok(await pathExists(new URL(assetPath.slice(1), publicRoot)), `${assetPath} is missing from public/`)
@@ -53,7 +53,7 @@ test('publication destinations and project repositories have no placeholder host
 
 test('site has a title, description, viewport-fit metadata, and bundled favicon', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8')
-  assert.match(html, /<title>Andrew Neil — Developer Portfolio<\/title>/)
+  assert.match(html, /<title>Andrew Neil — Agentic AI Engineer \| Python Backend<\/title>/)
   assert.match(html, /name="description" content="[^"]+"/)
   assert.match(html, /viewport-fit=cover/)
   assert.ok(await pathExists(new URL('favicon.svg', publicRoot)))

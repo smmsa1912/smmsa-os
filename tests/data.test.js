@@ -23,7 +23,7 @@ test('profile has the minimum public contact details', () => {
 })
 
 test('projects have unique IDs and core case-study content', () => {
-  assert.ok(projects.length >= 3, 'portfolio should feature multiple projects')
+  assert.equal(projects.length, 7, 'portfolio includes the seven documented projects')
   assert.ok(unique(projects.map((project) => project.id)), 'project IDs must be unique')
   for (const project of projects) {
     assert.ok(project.name?.trim(), `${project.id} needs a name`)
@@ -37,6 +37,14 @@ test('projects have unique IDs and core case-study content', () => {
       assert.ok(step.detail?.trim(), `${project.id} workflow step needs a description`)
     }
   }
+})
+
+test('research agent and award details stay evidence-scoped', () => {
+  const research = projects.find(p => p.id === 'research-agent')
+  assert.match(research.points.join(' '), /web search, Wikipedia, arXiv and calculator/)
+  assert.equal(research.verification, undefined)
+  assert.match(research.scopeNote, /No independently measured accuracy/)
+  assert.match(projects.find(p => p.id === 'kyc-smartcard').points.join(' '), /first place.*April 2025/)
 })
 
 test('project repository and demo links are valid HTTPS URLs when present', () => {
@@ -88,7 +96,7 @@ test('portfolio-critical windows open at comfortable desktop sizes', () => {
 test('all architecture diagrams exist and identify their provenance', async () => {
   const publicationIds = new Set(publications.map((paper) => paper.id))
   const diagrams = projects.flatMap((project) => (project.diagrams ?? []).map((diagram) => ({ project, diagram })))
-  assert.equal(diagrams.length, 6, 'three reference-paper diagrams and three project architecture diagrams should be included')
+  assert.equal(diagrams.length, 7, 'original diagrams plus OSCAR 3.0 admission model should be included')
   for (const { project, diagram } of diagrams) {
     assert.ok(diagram.title?.trim(), `${project.id} diagram needs a title`)
     assert.ok(diagram.caption?.trim(), `${project.id} diagram needs a provenance caption`)

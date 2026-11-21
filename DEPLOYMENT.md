@@ -11,7 +11,7 @@ npm run build
 npm run preview
 ```
 
-Open the local preview URL printed by Vite. Confirm that the retro desktop appears first after the short boot animation and the Welcome window opens on top without a simulated sign-in click. Start the 90-second recruiter tour and verify that it moves through Projects (OSCAR selected), Skills, Publications, Resume, and Contact while the tour panel stays visible. Test Skip/Escape, the Welcome window's direct resume/contact actions, and the taskbar's Recruiter View switch. Then test window sizing/restore, Start Menu, games, Ask My Portfolio, and the desktop's direct app icons. Check narrow mobile viewports (320px, 375px, 390px and landscape), resume PDF access, touch targets, and notched-phone safe areas.
+Open the local preview URL printed by Vite. Confirm the OS desktop appears immediately with the Engineering Dashboard open, current resume, featured case studies, Agent Lab and copilot shortcuts. Open both interactive apps as OS windows. Exercise approval, rejection, denial and stale-approval simulations. Ask the copilot about AI skills and compare a job description containing both Python and Kubernetes. Verify the 90-second tour and taskbar Dashboard return action. Exercise window sizing/restore, Start Menu, games, and Ask My Portfolio. Check narrow mobile viewports (320px, 375px, 390px and landscape), resume PDF access, touch targets, and keyboard navigation. The `dist/` folder in this package is freshly built; it can also be uploaded to an existing Pages Direct Upload project if that is your established deployment method.
 
 ## 2. Review public information
 
@@ -45,4 +45,4 @@ Build with `npm ci && npm run build`, then deploy the generated `dist/` director
 
 ## Current project status
 
-The project is already deployed through Cloudflare Pages in the existing setup. This source package contains the OS-first welcome and guided-tour update; it is not automatically pushed to the connected GitHub repository. After copying these changes into the repo and pushing them, check the Pages build log and verify both the stable `pages.dev` URL and custom domain. Build and lint should be confirmed by Cloudflare or in the developer's local environment before treating this revision as production-verified.
+This release is a local OS-first redesign, not an automatic update to the currently deployed domain. After copying these changes into the repo and pushing them, check the Pages build log and verify both the stable `pages.dev` URL and custom domain. The prior live-domain audit received HTTP 403 in the cloud browser; confirm successful public access from an independent network. Do not change the domain or DNS merely on the basis of that browser-specific response.

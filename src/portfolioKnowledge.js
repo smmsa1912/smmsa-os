@@ -22,6 +22,7 @@ const formatProjectBody = (project) => {
     `Technology stack: ${project.stack.join(', ')}.`,
     `Implementation details: ${project.points.join(' ')}`,
     project.metrics?.length ? `Recorded metrics: ${project.metrics.map((metric) => `${metric.label}: ${metric.value}`).join('; ')}. ${project.metricsNote ?? ''}` : '',
+    project.verification ? `Recorded verification: ${project.verification.value} ${project.verification.label}. ${project.verification.note}` : '',
     project.scopeNote ? `Scope and limitations: ${project.scopeNote}` : '',
     project.implementationCaveats?.length ? `Implementation caveats: ${project.implementationCaveats.join(' ')}` : '',
     project.workflow?.length ? `Workflow: ${project.workflow.map((step) => `${step.title}: ${step.detail}`).join(' ')}` : '',
@@ -102,6 +103,7 @@ const expandSynonyms = (query) => {
     [/\b(finverse|wallet|payment|nfc|blockchain|pos intent)\b/i, 'finverse wallet payment nfc blockchain pos transaction xgboost django esp32'],
     [/\b(toll|number plate|anpr|yolo|fastag)\b/i, 'toll system yolo opencv anpr ocr rfid vehicle detection'],
     [/\b(kyc|smart card|document verification|digilocker)\b/i, 'kyc smartcard rfid bluetooth jwt django document verification'],
+    [/\b(research agent|research automation|citation-backed|arxiv|wikipedia)\b/i, 'autonomous research agent tool calling web search evidence citations structured report'],
     [/\b(resume|cv|contact|email|linkedin|github)\b/i, 'profile contact email linkedin github resume'],
   ]
   let expanded = tokens.join(' ')
@@ -169,6 +171,7 @@ export function shouldUseLocalPortfolioGeneration(query) {
 
 const projectAliases = {
   oscar: ['oscar', 'desktop automation agent', 'desktop agent'],
+  'research-agent': ['autonomous research agent', 'research agent', 'research automation agent'],
   tradeassist: ['tradeassist', 'trade assist', 'trading project', 'backtesting project'],
   finverse: ['finverse', 'fin verse', 'payment platform'],
   'toll-system': ['dynamic toll charging system', 'toll charging system', 'toll system', 'tollgate project', 'anpr toll'],
@@ -189,14 +192,18 @@ function projectDocument(project) {
 
 function answerAboutProject(project, question) {
   const normalized = normalizeQuestion(question)
-  const asksMetrics = /\b(metric|result|performance|return|drawdown|cagr|trade|backtest|profit|win rate|sharpe)\b/.test(normalized)
+  const asksMetrics = /\b(metrics?|results?|performance|return|drawdown|cagr|trade|backtest|profit|win rate|sharpe|tests?|verification)\b/.test(normalized)
   const asksLimitations = /\b(limit|limitation|limitations|weakness|weaknesses|risk|caveat|caveats|secure|security|production|production ready|real world|real-world|issue|issues|what is missing)\b/.test(normalized)
   const asksStack = /\b(stack|technology|technologies|framework|frameworks|language|languages|built with|tools|library|libraries|database)\b/.test(normalized)
   const asksWorkflow = /\b(how|architecture|architect|workflow|flow|process|work|works|under the hood|design|components|features)\b/.test(normalized)
   const lines = [`${project.name}: ${project.summary}`]
 
-  if (asksMetrics && project.metrics?.length) {
-    lines.push(`Recorded results: ${project.metrics.map((metric) => `${metric.label}: ${metric.value}`).join('; ')}.`)
+  if (/\b(?:github|repository|repo link|source code)\b/.test(normalized)) {
+    lines.push(project.repo ? `Public repository: ${project.repo}` : 'A direct public repository link is not currently listed for this project. See the GitHub profile from the dashboard.');
+  } else if (asksMetrics && !project.metrics?.length && !project.verification) {
+    lines.push('No measured benchmark or regression count is documented for this project.');
+  } else if (asksMetrics && (project.metrics?.length || project.verification)) {
+    if (project.metrics?.length) lines.push(`Recorded results: ${project.metrics.map((metric) => `${metric.label}: ${metric.value}`).join('; ')}.`)
     if (project.metricsNote) lines.push(project.metricsNote)
   } else if (asksLimitations) {
     if (project.scopeNote) lines.push(`Scope: ${project.scopeNote}`)
@@ -220,6 +227,7 @@ function answerAboutProject(project, question) {
     if (project.implementationCaveats?.length) lines.push(`Known caveats:\n${bullets(project.implementationCaveats)}`)
   }
 
+  if (project.verification) lines.push(`Recorded verification: ${project.verification.value} ${project.verification.label}. ${project.verification.note}`)
   if (project.repo) lines.push(`Repository: ${project.repo}`)
   return { answer: lines.join('\n\n'), sources: [projectDocument(project)].filter(Boolean) }
 }
@@ -235,7 +243,10 @@ export function resolvePortfolioNavigationCommand(query) {
     { aliases: ['resume', 'cv', 'curriculum vitae'], appTarget: 'resume', label: 'Resume' },
     { aliases: ['project', 'projects', 'case studies', 'case study', 'portfolio projects'], appTarget: 'projects', label: 'Projects' },
     { aliases: ['paper', 'papers', 'publication', 'publications', 'research'], appTarget: 'papers', label: 'Publications' },
-    { aliases: ['about', 'about me', 'profile', 'home', 'quick view'], appTarget: 'about', label: 'About Andrew' },
+    { aliases: ['home', 'dashboard', 'engineering dashboard', 'portfolio'], appTarget: 'recruiter', label: 'Engineering Dashboard' },
+    { aliases: ['lab', 'agent lab', 'agent execution lab'], appTarget: 'lab', label: 'Agent Execution Lab' },
+    { aliases: ['copilot', 'recruiter copilot'], appTarget: 'copilot', label: 'Recruiter Copilot' },
+    { aliases: ['about', 'about me', 'profile', 'quick view'], appTarget: 'about', label: 'About Andrew' },
     { aliases: ['contact', 'contacts', 'email', 'contact details'], appTarget: 'contact', label: 'Contact' },
     { aliases: ['assistant', 'ai', 'portfolio assistant', 'ask my portfolio'], appTarget: 'assistant', label: 'Ask My Portfolio' },
     { aliases: ['file explorer', 'explorer', 'files', 'file manager'], appTarget: 'explorer', label: 'File Explorer' },
@@ -270,6 +281,8 @@ export function resolveDirectPortfolioAnswer(query) {
   const normalized = normalizeQuestion(queryText)
   if (!normalized) return null
   const sources = [profileDoc]
+  const mentioned = mentionedProjects(normalized)
+  const asksComparison = /\b(?:compare|comparison|difference between|differences|versus|vs\.?|contrast|which is better)\b/.test(normalized)
 
   if (/^(?:hi+|hello+|hey+|heya|hiya|yo|howdy|sup|what's up|whats up|good morning|good afternoon|good evening)(?: there| assistant| portfolio| ai| andrew)?$/.test(normalized)) {
     return { answer: "Hey! 👋 I'm Ask My Portfolio, your guide to Andrew Neil's work. I can explain projects, compare architectures, share skills and experience, find published papers, and point you to the resume or contact links.", sources: [] }
@@ -306,6 +319,12 @@ export function resolveDirectPortfolioAnswer(query) {
   if (/\b(?:what(?:'s|s| is) (?:my|his|andrew(?:'s)?|the owner's?) (?:full )?name|who am i|who is andrew|who is this portfolio about|what is andrew's full name|what's his name)\b/.test(normalized) || /\b(?:my|his|andrew's) name\b/.test(normalized)) {
     return { answer: 'The portfolio belongs to Andrew Neil.', sources }
   }
+  if (mentioned.length >= 2 && asksComparison) {
+    const comparison = mentioned.slice(0, 3).map((project) => `${project.name}\n• Focus: ${project.summary}\n• Stack: ${project.stack.join(', ')}\n• Scope: ${project.scopeNote ?? project.kind}`).join('\n\n')
+    return { answer: `Here’s a portfolio-grounded comparison:\n\n${comparison}\n\nThey target different problems, so “better” depends on the role and use case.`, sources: mentioned.slice(0, 3).map(projectDocument).filter(Boolean) }
+  }
+  if (mentioned.length === 1 && (mentioned[0].id === 'research-agent' || /\b(?:github|repository|repo link|source code)\b/.test(normalized))) return answerAboutProject(mentioned[0], queryText)
+
   if (/\b(?:email|e-mail)\b/.test(normalized)) {
     return { answer: `Andrew Neil's email address is ${profile.email}.`, sources }
   }
@@ -338,10 +357,11 @@ export function resolveDirectPortfolioAnswer(query) {
     && /\b(project|projects|work|experience|show|demonstrate|best|strongest|which|evidence|example)\b/.test(normalized)
   if (asksAgenticProjects) {
     const oscar = projects.find((project) => project.id === 'oscar')
+    const researchAgent = projects.find((project) => project.id === 'research-agent')
     const finverse = projects.find((project) => project.id === 'finverse')
     return {
-      answer: `OSCAR is the clearest example of agentic automation in this portfolio. ${oscar.summary}\n\nIts documented workflow plans and routes actions to browser, desktop UI, or terminal agents, then uses fresh observations, bounded retries and outcome checks. FinVerse explores AI-assisted financial workflows, but it is a financial-platform prototype rather than a documented general-purpose agent.`,
-      sources: [projectDocument(oscar), projectDocument(finverse)].filter(Boolean),
+      answer: `OSCAR is the clearest example of agentic automation in this portfolio. ${oscar.summary}\n\nIts documented workflow plans and routes actions to browser, desktop UI, or terminal agents, then uses fresh observations, bounded retries and outcome checks. ${researchAgent.name} demonstrates iterative evidence retrieval through web search, Wikipedia, arXiv and calculator tools. FinVerse explores AI-assisted financial workflows, but it is a financial-platform prototype rather than a documented general-purpose agent.`,
+      sources: [projectDocument(oscar), projectDocument(researchAgent), projectDocument(finverse)].filter(Boolean),
     }
   }
 
@@ -359,7 +379,7 @@ export function resolveDirectPortfolioAnswer(query) {
     return { answer: `Published research listed in the portfolio (${publications.length} papers):\n${bullets(publications.map((paper) => `${paper.title} — ${paper.where}`))}\n\nUse the Read paper links below to open the publications.`, sources: publicationDocs }
   }
   if (/\b(?:won|winner|winning|competition|award|achievement|accomplishment|stand out|highlights)\b/.test(normalized)) {
-    return { answer: `Portfolio highlights:\n${bullets(highlights)}\n\nThe Dynamic Toll Charging System is listed as the college mini-project competition winner.`, sources: [profileDoc, projectDocument(projects.find((project) => project.id === 'toll-system'))].filter(Boolean) }
+    return { answer: `Portfolio highlights:\n${bullets(highlights)}`, sources: [profileDoc, projectDocument(projects.find((project) => project.id === 'kyc-smartcard')), projectDocument(projects.find((project) => project.id === 'toll-system'))].filter(Boolean) }
   }
 
   const asksProjectList = /\b(?:show|list|give|name|tell me about)\b.*\bprojects?\b|\b(?:what|which) projects\b|\bwhat are (?:all )?(?:his|her|andrew's|the) projects\b|\bwhat projects (?:has|have|does)\b|\bprojects?\b.*\b(?:built|created|worked on)\b|\bthings have you built\b|\bshow me his project\b/.test(normalized)
@@ -367,12 +387,6 @@ export function resolveDirectPortfolioAnswer(query) {
     return { answer: `Here are the projects documented in Andrew Neil's portfolio:\n${projects.map((project) => `• ${project.name}: ${project.summary}`).join('\n')}\n\nEach case study lists its technology stack, workflow and known limitations.`, sources: projectDocs }
   }
 
-  const mentioned = mentionedProjects(normalized)
-  const asksComparison = /\b(?:compare|comparison|difference between|differences|versus|vs\.?|contrast|which is better)\b/.test(normalized)
-  if (asksComparison && mentioned.length >= 2) {
-    const comparison = mentioned.slice(0, 3).map((project) => `${project.name}\n• Focus: ${project.summary}\n• Stack: ${project.stack.join(', ')}\n• Scope: ${project.scopeNote ?? project.kind}`).join('\n\n')
-    return { answer: `Here’s a portfolio-grounded comparison:\n\n${comparison}\n\nThey target different problems, so “better” depends on whether you care most about agentic automation, quantitative research, fintech/IoT, computer vision, or identity verification.`, sources: mentioned.slice(0, 3).map(projectDocument).filter(Boolean) }
-  }
   if (/\b(?:best|strongest|most impressive|standout|stand out|favorite)\b.*\bproject\b|\b(?:which|what) project\b.*\b(?:best|better|strongest)\b/.test(normalized)) {
     return { answer: `There isn't one objectively best project; it depends on the role:\n${bullets(['For Agentic AI and desktop/browser automation: OSCAR.', 'For quantitative research, metrics and risk controls: TradeAssist.', 'For computer vision and a competition result: Dynamic Toll Charging System.', 'For fintech, hardware authentication and IoT: FinVerse.', 'For identity/document workflows and dual-mode authentication: KYC Smart Card.'])}\n\nFor an Agentic AI interview, OSCAR is the strongest fit to lead with because its documented workflow centers on planning, tool routing, observation and outcome checks.`, sources: projectDocs }
   }
@@ -389,7 +403,7 @@ export function resolveDirectPortfolioAnswer(query) {
     const languageOnly = /\b(?:programming languages|languages does|which languages|coding languages)\b/.test(normalized)
     const aiOnly = /\b(?:agentic ai|ai skills|machine learning|ml skills|ai tools|automation skills)\b/.test(normalized)
     const backendOnly = /\b(?:backend|back end|api skills|server side|databases?)\b/.test(normalized)
-    const selectedGroups = languageOnly ? ['Languages'] : aiOnly ? ['AI and automation', 'ML and vision'] : backendOnly ? ['Backend and data'] : groupMatch ? [groupMatch] : Object.keys(skills)
+    const selectedGroups = languageOnly ? ['Languages'] : aiOnly ? ['Agentic AI and LLM engineering', 'Automation and computer use', 'ML and computer vision'] : backendOnly ? ['Backend and data'] : groupMatch ? [groupMatch] : Object.keys(skills)
     return { answer: `Technical skills and tools${selectedGroups.length === 1 ? ` — ${selectedGroups[0]}` : ''}:\n${selectedGroups.map((group) => `• ${group}: ${skills[group].join(', ')}`).join('\n')}\n\nThis is the portfolio’s technology inventory, not a claim that every tool is used at the same proficiency level.`, sources: [skillsDoc] }
   }
 

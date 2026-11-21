@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useOS } from '../store'
 import { appMeta } from '../appMeta'
@@ -218,7 +218,7 @@ export default function Window({ win }) {
         </button>
       </header>
       <div className="win-body">
-        <App />
+        <Suspense fallback={<div className="window-loading" role="status">Opening {meta.title}…</div>}><App /></Suspense>
       </div>
       {!full && !snapped && ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw'].map((direction) => (
         <div

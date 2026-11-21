@@ -1,6 +1,6 @@
 # SMMSA-OS architecture diagrams
 
-The six diagrams in `public/diagrams/` are newly authored, editable SVGs. Three redraw architectures described by published papers (Dynamic Toll and two KYC versions); the others describe OSCAR, TradeAssist, and FinVerse from the available repository/project documentation. They are explanatory figures, not copied paper graphics. The notes below distinguish repository-backed details from high-level reconstruction and describe known implementation caveats.
+The seven diagrams in `public/diagrams/` are authored, editable SVGs. Three redraw architectures described by published papers (Dynamic Toll and two KYC versions); the others describe OSCAR, TradeAssist, and FinVerse from the available repository/project documentation, including a new illustrative OSCAR 3.0 admission sequence. They are explanatory figures, not copied paper graphics. The notes below distinguish repository-backed details from high-level reconstruction and describe known implementation caveats.
 
 ## 1. Dynamic Toll Charging System
 
@@ -33,6 +33,12 @@ SVG is used so diagrams remain scalable and their labels, lines, colors, and box
 - Recreated elements: Flutter desktop interface; Python planner/orchestrator; provider-neutral action-model gateway (Gemini and explicitly configured OpenAI-compatible providers); action validation; route selection; BrowserAgent / Playwright, UIAgent with PyAutoGUI and vision utilities, TerminalAgent and shortcut handling; persistent workflow state, trace/logging, budget controls, and a feedback loop based on fresh observations.
 - Scope distinction: a Windows-first local automation prototype. The diagram does not imply every target application can be controlled reliably or that a planned action always succeeds.
 
+### OSCAR 3.0 admission model
+
+- Asset: `public/diagrams/oscar-policy-gate.svg`
+- Source basis: Andrew's recorded 3.0 staged design and restricted Stage 3A qualification notes.
+- Scope distinction: illustrative typed contract, policy, approval and freshness sequence; not independently source-code verified or proof of general production capability.
+
 ## 5. TradeAssist — quantitative research and backtesting pipeline
 
 - Asset: `public/diagrams/tradeassist-research-pipeline.svg`
@@ -49,4 +55,4 @@ SVG is used so diagrams remain scalable and their labels, lines, colors, and box
 
 ## Editing / export
 
-All six figures are authored SVGs, so text and geometry can be changed directly. New project diagrams use the same retro-inspired palette as the three reference-paper diagrams. PNG files supplied in the standalone diagram archive are rendered previews; SVG is the editable source of truth.
+All seven figures are authored SVGs, so text and geometry can be changed directly. SVG is the editable source of truth.

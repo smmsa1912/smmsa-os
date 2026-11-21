@@ -69,7 +69,7 @@ export default function StartMenu() {
 
       <button type="button" className="start-recruiter-shortcut" onClick={() => openApp('recruiter')}>
         <span className="start-recruiter-shortcut-icon"><PixelIcon name="briefcase" size={23} /></span>
-        <span><strong>Recruiter Desk</strong><small>Resume, best projects, skills & contact</small></span>
+        <span><strong>Engineering Dashboard</strong><small>Resume, projects, Agent Lab & copilot</small></span>
         <b aria-hidden="true">↗</b>
       </button>
 

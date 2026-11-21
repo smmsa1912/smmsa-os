@@ -1,8 +1,8 @@
 import { education, experience, highlights, profile, projects, publications, skills } from '../data'
 import { useOS } from '../store'
 
-const FEATURED_IDS = ['oscar', 'toll-system', 'tradeassist']
-const SKILL_GROUPS = ['AI and automation', 'Backend and data', 'ML and vision']
+const FEATURED_IDS = ['oscar', 'research-agent', 'tradeassist']
+const SKILL_GROUPS = ['Agentic AI and LLM engineering', 'Backend and data', 'Automation and computer use']
 
 export default function RecruiterDesk() {
   const openApp = useOS((state) => state.openApp)
@@ -19,20 +19,22 @@ export default function RecruiterDesk() {
   return (
     <main className="recruiter-desk-app">
       <header className="recruiter-desk-topbar">
-        <span className="recruiter-desk-mark" aria-hidden="true">RD</span>
+        <span className="recruiter-desk-mark" aria-hidden="true">AN</span>
         <div className="recruiter-desk-topcopy">
-          <strong>RECRUITER DESK</strong>
+          <strong>ENGINEERING DASHBOARD</strong>
+          <span>SMMSA-OS / Portfolio workspace</span>
         </div>
-        <span className="recruiter-desk-time">30 SEC</span>
+        <span className="recruiter-desk-time">● AVAILABLE · REMOTE / MUMBAI</span>
       </header>
 
       <section className="recruiter-desk-hero">
         <div className="recruiter-desk-identity">
           <div className="recruiter-desk-monogram" aria-hidden="true">AN</div>
           <div>
-            <p className="recruiter-desk-eyebrow">COMPUTER ENGINEERING · CLASS OF {profile.grad}</p>
+            <p className="recruiter-desk-eyebrow">AGENTIC AI · PYTHON ENGINEERING</p>
             <h1>{profile.name}</h1>
-            <p className="recruiter-desk-role">AI automation · Python backend · Computer vision</p>
+            <p className="recruiter-desk-role">{profile.role}</p>
+            <p className="recruiter-desk-summary">I build AI agents that act, verify, and recover — with typed tools, policy controls and reliable Python backends.</p>
           </div>
         </div>
         <div className="recruiter-desk-actions">
@@ -43,10 +45,15 @@ export default function RecruiterDesk() {
       </section>
 
       <section className="recruiter-desk-proof" aria-label="Quick facts">
-        <div><span className="recruiter-desk-proof-label">CURRENT EXPERIENCE</span><strong>{currentRole.role}</strong><small>{currentRole.org} · {currentRole.when}</small></div>
-        <div><span className="recruiter-desk-proof-label">EDUCATION</span><strong>{education.degree}</strong><small>{education.school} · {education.when}</small></div>
-        <div><span className="recruiter-desk-proof-label">RESEARCH</span><strong>{publications.length} published papers</strong></div>
-        <div><span className="recruiter-desk-proof-label">PROJECTS</span><strong>{projects.length} projects</strong></div>
+        <div><span className="recruiter-desk-proof-label">OSCAR 3.0</span><strong>{projects.find(project => project.id === 'oscar')?.verification?.value}</strong><small>Recorded tests passed</small></div>
+        <div><span className="recruiter-desk-proof-label">TRADEASSIST 2.0</span><strong>{projects.find(project => project.id === 'tradeassist')?.verification?.value}</strong><small>Recorded tests passed</small></div>
+        <div><span className="recruiter-desk-proof-label">RESEARCH</span><strong>{publications.length}</strong><small>Published papers</small></div>
+        <div><span className="recruiter-desk-proof-label">FREELANCE</span><strong>2 × 5★</strong><small>Upwork client reviews</small></div>
+      </section>
+
+      <section className="dashboard-action-grid" aria-label="Interactive engineering applications">
+        <button type="button" onClick={() => openApp('lab')}><span className="dashboard-action-icon" aria-hidden="true">⌘</span><span><small>LIVE SIMULATION</small><strong>Agent Execution Lab</strong><em>Inspect policy decisions and execution traces.</em></span><b aria-hidden="true">↗</b></button>
+        <button type="button" onClick={() => openApp('copilot')}><span className="dashboard-action-icon" aria-hidden="true">✦</span><span><small>LOCAL-FIRST ASSISTANT</small><strong>Recruiter Copilot</strong><em>Ask technical questions or compare a job description.</em></span><b aria-hidden="true">↗</b></button>
       </section>
 
       <section className="recruiter-desk-section">
@@ -89,6 +96,8 @@ export default function RecruiterDesk() {
           </div>
         </div>
       </section>
+
+      <section className="dashboard-background"><div><p className="recruiter-desk-eyebrow">ENGINEERING EXPERIENCE</p><strong>{currentRole.role} · {currentRole.org}</strong><small>{currentRole.when}</small><p>{currentRole.points[0]}</p></div><div><p className="recruiter-desk-eyebrow">EDUCATION</p><strong>{education.degree}</strong><small>{education.school} · {education.when}</small><p>CGPA {education.cgpa}</p></div></section>
 
       <footer className="recruiter-desk-footer">
         <div className="recruiter-desk-socials">

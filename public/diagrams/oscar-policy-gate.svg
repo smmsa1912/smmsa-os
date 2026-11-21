@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">OSCAR 3.0 authorization architecture</title>
+  <desc id="desc">Illustrative execution admission sequence: validate typed payload, classify risk, match grant and policy, obtain exact action approval, check freshness, then admit the action or block.</desc>
+  <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6" fill="#8ca6bf"/></marker><style>text{font-family:system-ui,sans-serif}.label{fill:#edf4ff;font-size:18px;font-weight:650}.note{fill:#a9bcd2;font-size:13px}.head{fill:#8de5cf;font-size:12px;font-weight:700;letter-spacing:2px}.node{fill:#17283d;stroke:#435d76;stroke-width:1.5}.edge{fill:none;stroke:#8ca6bf;stroke-width:2;marker-end:url(#arrow)}.block{fill:#efb1b1;font-size:14px;font-weight:700}</style></defs>
+  <rect width="960" height="520" rx="22" fill="#0c1829"/>
+  <text x="32" y="38" class="head">OSCAR 3.0 / ADMISSION MODEL</text>
+  <text x="32" y="66" class="note">Illustrative design • restricted qualification, not general production automation</text>
+  <rect x="32" y="100" width="274" height="94" rx="13" class="node"/>
+  <text x="52" y="137" class="label">01  Typed action contract</text><text x="52" y="164" class="note">Canonical payload + capability binding</text>
+  <rect x="343" y="100" width="274" height="94" rx="13" class="node"/>
+  <text x="363" y="137" class="label">02  Risk classification</text><text x="363" y="164" class="note">Sensitivity, scope and reversibility</text>
+  <rect x="654" y="100" width="274" height="94" rx="13" class="node"/>
+  <text x="674" y="137" class="label">03  Permission + policy</text><text x="674" y="164" class="note">Require a matching grant</text>
+  <path d="M306 147H336M617 147H647" class="edge"/>
+  <path d="M791 194V244" class="edge"/>
+  <rect x="654" y="252" width="274" height="94" rx="13" class="node"/>
+  <text x="674" y="289" class="label">04  Exact-action approval</text><text x="674" y="316" class="note">Authenticated approval when needed</text>
+  <rect x="343" y="252" width="274" height="94" rx="13" class="node"/>
+  <text x="363" y="289" class="label">05  Freshness + admission</text><text x="363" y="316" class="note">Reject stale authorization bindings</text>
+  <rect x="32" y="252" width="274" height="94" rx="13" fill="#16392f" stroke="#69bfa9" stroke-width="1.5"/>
+  <text x="52" y="289" class="label">06  Admitted execution</text><text x="52" y="316" class="note">Dispatch allowed capability; verify</text>
+  <path d="M654 299H624M343 299H313" class="edge"/>
+  <path d="M791 346V380H486V406" class="edge" stroke-dasharray="5 5"/><path d="M480 346V406" class="edge" stroke-dasharray="5 5"/>
+  <rect x="343" y="414" width="274" height="65" rx="13" fill="#342432" stroke="#a77683"/><text x="363" y="440" class="block">BLOCKED • NO DISPATCH</text><text x="363" y="460" class="note">Denied, rejected or stale authorization</text>
+  <text x="32" y="497" class="note">Source basis: recorded OSCAR 3.0 staged design and restricted qualification milestones.</text>
+</svg>

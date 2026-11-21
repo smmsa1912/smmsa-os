@@ -1,10 +1,14 @@
 # SMMSA-OS — Interactive Portfolio
 
-SMMSA-OS is an interactive retro desktop portfolio with a dedicated **Recruiter Desk** built directly into the experience. The desktop stays visible behind this first window; Recruiter Desk puts the resume, selected projects, skills, experience, publications and contact links front and center. Visitors can launch case studies, start a 90-second guided tour, or continue exploring the games, assistant, and the rest of the OS.
+SMMSA-OS 2.1 is Andrew Neil's agentic AI and Python backend engineering portfolio. The interactive desktop is the first impression, with an Engineering Dashboard already open and immediately accessible resume, selected work, technical evidence, Agent Execution Lab and Recruiter Copilot. There is no separate landing page or mandatory boot sequence.
 
 ## Portfolio features
 
-- **Recruiter Desk** is the default in-OS entry point. It opens over the retro desktop with direct resume/email actions, selected case studies, current experience, education, skills, publication count and additional proof points. Project cards open the matching in-OS case studies. The taskbar, desktop icon and Start menu all provide direct access, and the guided tour walks through Projects, Skills, Publications, Resume and Contact without leaving the OS.
+- **Engineering Dashboard** opens directly within the OS, without a boot animation. It features OSCAR 3.0, Autonomous Research Agent and TradeAssist 2.0, seven evidence-scoped case studies, updated experience and research, the current resume, and shortcuts to interactive engineering apps. Project verification counts are recorded milestones supplied by Andrew, not tests executed by this portfolio.
+- **Agent Lab** illustrates typed action and authorization decisions with deterministic examples: allowed sensitive reads, approval rejection, policy denial and stale-approval rejection. It runs no system commands and is not the actual OSCAR runtime.
+- **Recruiter Copilot** answers from curated local facts and maps job-description keywords to documented capabilities and explicit evidence gaps. This comparison is not an LLM screening or hiring score; text remains in the browser.
+
+- The dashboard, Agent Lab and Copilot are real OS windows. Open them from desktop shortcuts, Start, the taskbar or Terminal; move, resize, minimize or maximize them like other applications.
 - Projects Explorer has searchable case studies, topic filters, high-level workflow and architecture diagrams for OSCAR, TradeAssist, FinVerse, Dynamic Toll Charging, and KYC Smart Card (editable SVGs), source labels/citations, technology stacks, recorded backtest metrics with an explicit caveat, and project scope/limitations. Repository/demo links appear only where configured.
 - **Ask My Portfolio** is a hybrid local-first assistant. Greetings, identity/contact facts, resume links, and desktop-navigation commands are answered directly for reliability; open-ended prompts (explanations, comparisons, recommendations, critique, writing, and unfamiliar questions) can use an optional WebLLM model in a WebGPU-capable browser. Casual phrasing and recent user turns are supported, while claims about Andrew remain grounded in the curated portfolio data. The model runs in the browser and is not part of the initial site bundle. The first model load downloads runtime/model assets from public CDNs and may use substantial browser storage/GPU memory (the selected small model is configured for roughly 1 GB of GPU memory). Questions are not sent to an inference API. If local inference is unavailable, curated answers still work.
 - **Game Center** includes four retro mini-games: Snake with selectable speeds and pause/swipe controls; Memory Match with three difficulties and a timer; 2048 with undo and local best score; and Reaction Rush with a false-start challenge. Best scores are saved in browser local storage.
@@ -45,8 +49,8 @@ Most public-facing profile content lives in `src/data.js`. Update these values b
 - **Drag** icons to arrange them and drag window title bars to move windows.
 - **Resize** regular windows from any edge or corner; drag to a screen edge to snap.
 - Use `Ctrl + Alt + ←/→` to snap the active window, `Ctrl + Alt + ↑` to maximize, and `Ctrl + Alt + ↓` to restore.
-- **Start → Power → Lock** shows the simulated lock screen; Restart replays startup. First-time public visitors enter the desktop automatically after the short boot animation.
-- Type `help` in Terminal for available commands; `open skills`, `open projects`, `open assistant` (or `ask`), `home`, and `download` are supported.
+- **Start → Power → Lock** shows the simulated lock screen; Restart replays startup. First-time public visitors enter the desktop immediately with the Engineering Dashboard open.
+- Type `help` in Terminal for available commands; `open skills`, `open projects`, `open lab`, `open copilot`, `open assistant` (or `ask`), `home`, and `download` are supported.
 
 ## Deploying
 

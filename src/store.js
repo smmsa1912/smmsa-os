@@ -121,10 +121,10 @@ export const useOS = create((set, get) => ({
   })),
 
   // One window per app: opening an app that is already open brings it to the front.
-  openApp: (appId) => {
+  openApp: (appId, options = {}) => {
     const meta = appMeta[appId]
     if (!meta) return false
-    if (get().sound) playSound('open')
+    if (get().sound && !options.silent) playSound('open')
     set((s) => ({ recentApps: [appId, ...s.recentApps.filter((id) => id !== appId)].slice(0, 5) }))
     const found = get().windows.find((w) => w.appId === appId)
     if (found) {

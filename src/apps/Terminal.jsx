@@ -15,6 +15,8 @@ const HELP = [
   '  open papers open the publications window',
   '  ask          open the portfolio AI assistant',
   '  open assistant open Ask My Portfolio',
+  '  open lab      open Agent Execution Lab',
+  '  open copilot  open Recruiter Copilot',
   '  contact     how to reach me',
   '  resume      open the resume window',
   '  download    open the resume PDF',
@@ -61,8 +63,8 @@ export default function Terminal() {
     if (cmd === 'clear') return setLines([])
     let out
     if (cmd === 'open' || cmd === 'resume' || cmd === 'play' || cmd === 'home' || cmd === 'ask') {
-      const rawTarget = cmd === 'open' ? args[0] : cmd === 'play' ? 'games' : cmd === 'resume' ? 'resume' : cmd === 'ask' ? 'assistant' : 'quick'
-      const aliases = { home: 'quick', portfolio: 'quick', profile: 'about', explorer: 'explorer', projects: 'projects', skills: 'skills', contact: 'contact', ask: 'assistant', ai: 'assistant', assistant: 'assistant' }
+      const rawTarget = cmd === 'open' ? args[0] : cmd === 'play' ? 'games' : cmd === 'resume' ? 'resume' : cmd === 'ask' ? 'assistant' : 'recruiter'
+      const aliases = { home: 'recruiter', portfolio: 'recruiter', dashboard: 'recruiter', profile: 'about', explorer: 'explorer', projects: 'projects', skills: 'skills', contact: 'contact', ask: 'assistant', ai: 'assistant', assistant: 'assistant', lab: 'lab', copilot: 'copilot' }
       const target = aliases[String(rawTarget ?? '').toLowerCase()] ?? String(rawTarget ?? '').toLowerCase()
       out = openApp(target) ? [`Opening ${appMeta[target]?.title ?? target}...`] : [`open: no app named "${rawTarget ?? ''}". Try ls.`]
     } else if (cmd === 'download') {

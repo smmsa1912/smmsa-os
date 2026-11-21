@@ -3,13 +3,15 @@
 export const profile = {
   name: 'Andrew Neil',
   handle: 'smmsa1912',
-  role: 'AI Engineer · Agentic Systems & Backend Engineering',
+  role: 'Agentic AI Engineer · Python Backend Engineer',
   school: 'Xavier Institute of Engineering, Mumbai',
   grad: 2027,
+  location: 'Mumbai, India',
+  availability: 'Open to remote and Mumbai opportunities',
   tagline: 'Building reliable AI agents, tool-driven automation and Python backend systems.',
   bio: [
     'I am a Computer Engineering student at Xavier Institute of Engineering, Mumbai (2027) focused on agentic AI, AI engineering and backend systems. I have professional backend-internship experience building Django workflows and freelance experience delivering Python automation projects.',
-    'I build practical, tool-using AI systems with an emphasis on reliable execution, evaluation and human-verifiable outcomes. My work spans OSCAR, a Windows-first desktop and browser automation agent; TradeAssist, a quantitative research and backtesting system; and fintech, IoT and computer-vision prototypes.',
+    'I build practical, tool-using AI systems with an emphasis on reliable execution, evaluation and human-verifiable outcomes. My work spans OSCAR, a Windows-first desktop and browser automation agent; an Autonomous Research Agent producing citation-backed reports; TradeAssist, a quantitative research and backtesting system; and fintech, IoT and computer-vision prototypes.',
   ],
   github: 'https://github.com/smmsa1912',
   email: 'andrewneil1912@gmail.com',
@@ -19,10 +21,10 @@ export const profile = {
 
 export const highlights = [
   'Agentic AI and backend engineering portfolio focused on Python, tool calling and reliable automation',
-  'Backend Engineer Intern at 4iStudio — Django workflows for a college ERP',
-  'Passed Handshake AI Project Maser / Project Hertz technical assessment (CodeSignal)',
+  'Backend Engineer Intern at 4i Studio — Django ERP workflows, AI analysis and chatbot integration',
+  'KYC Smart Card — first place, SE Mini Project Competition (April 2025)',
   'Three IJIRT publications across KYC Smart Card and Dynamic Toll Charging System',
-  'Competition-winning Dynamic Toll Charging System project',
+  'OSCAR and Dynamic Toll Charging System — college project competition recognition',
   'Freelance Python development experience with completed Upwork contracts and five-star client feedback',
 ]
 
@@ -38,19 +40,20 @@ export const experience = [
   {
     id: '4istudio',
     role: 'Backend Engineer Intern',
-    org: '4iStudio',
+    org: '4i Studio',
     when: 'Jul 2026 to Nov 2026',
-    tech: ['Python', 'Django', 'Relational databases'],
+    tech: ['Python', 'Django', 'REST APIs', 'Relational databases', 'AI integration'],
     points: [
       'Built and contributed to Django ERP workflows for a polytechnic-college environment, covering student records and academic administration for department heads, teachers, classes and students.',
       'Worked on backend workflows for marks entry, attendance, student data, marksheets and certificates.',
+      'Integrated AI-assisted analysis and chatbot features into the institutional ERP.',
     ],
   },
   {
     id: 'freelance',
     role: 'Freelance Python Developer',
     org: 'Upwork contracts',
-    when: 'Freelance engagements',
+    when: '2025',
     tech: ['Python', 'Selenium', 'Browser automation', 'LLM APIs', 'SMTP'],
     points: [
       'Built a website monitor that checked appointment availability and emailed alerts through the client\'s SMTP server.',
@@ -67,30 +70,34 @@ export const projects = [
     kind: 'Personal project',
     tags: ['AI agents', 'Automation'],
     summary:
-      'A Windows-first, local-first vision-powered desktop automation agent with a cloud-planner core. OSCAR translates natural-language goals into structured, tool-executed workflows across browser, desktop UI and terminal environments.',
+      'A Windows-first agentic automation system. OSCAR 2.x translates natural-language goals into browser, desktop and terminal workflows; the ongoing 3.0 rebuild emphasizes typed execution contracts, policy enforcement and verified outcomes.',
     points: [
       'Python orchestration backend with a Flutter desktop interface and provider-adapter architecture for hosted and local language models.',
       'Tool-calling planner routes structured actions to specialized browser, desktop/UI and terminal capabilities while maintaining workflow context.',
       'Vision-assisted interaction combines screenshots, OCR and UI observations with Playwright browser automation and desktop input control.',
       'Includes keyboard/mouse recording and replay, bounded retries, fresh observations, action validation, outcome checks and duplicate-action safeguards.',
-      'Regression suite reached 243 passing tests, covering core workflows and mocked Windows API paths.',
+      'OSCAR 3.0 redesign introduces typed action contracts, canonical execution bindings, risk-aware policies, explicit permission grants and exact-action approval lifecycle.',
+      'Stage 3A qualified restricted local-console Windows Hello authentication and session binding. Recorded full locked regression suite: 776 passed, 31 expected native opt-in skips.',
     ],
     workflow: [
       { title: 'Describe a task', detail: 'The user provides a goal in natural language.' },
-      { title: 'Plan and route', detail: 'The planner generates validated structured tool calls and routes each action to the relevant browser, desktop or terminal capability.' },
-      { title: 'Observe and act', detail: 'Specialized agents execute browser and desktop actions using current observations, screenshots and supported tools.' },
-      { title: 'Check the result', detail: 'The system verifies outcomes, refreshes observations and applies bounded retries to reduce duplicate or ineffective actions.' },
+      { title: 'Plan and route', detail: 'Structured actions are bound to typed tool contracts and validated against the registered capability.' },
+      { title: 'Authorize', detail: 'The 3.0 design classifies risk, matches permission and policy, and requires exact-action approval where applicable.' },
+      { title: 'Observe and act', detail: 'Execution is restricted to admitted capabilities; the older 2.x agents support browser, desktop and terminal actions.' },
+      { title: 'Verify and recover', detail: 'Outcome checks, fresh observations and bounded recovery reduce duplicate or ineffective actions.' },
     ],
-    scopeNote: 'Windows-first, local-first engineering project. It is an actively developed automation system, not a guarantee of autonomous success in every application; execution quality depends on application state, permissions, model output and available tools.',
+    verification: { value: '776', label: 'Passing regression tests', note: 'Recorded Stage 3A locked suite; 31 expected native opt-in skips. Restricted local-console scope only.' },
+    scopeNote: 'Windows-first local automation project. OSCAR 3.0 is an active rebuild; the restricted Stage 3A qualification does not establish general desktop automation, remote-session support, or production readiness. Full OSCAR 2.x capabilities should not be attributed to 3.0.',
     diagrams: [
       {
         src: '/diagrams/oscar-system-architecture.svg',
-        title: 'System architecture',
+        title: 'OSCAR 2.x system architecture',
         caption: 'Redrawn from the public repository README and backend module layout. It shows the Flutter desktop UI, Python planner/orchestrator, provider-neutral model gateway, validated action routing, specialized agents, and the observation loop.',
         sourceLabel: 'Public GitHub README and backend modules',
         sourceUrl: 'https://github.com/smmsa1912/OSCAR',
         sourceLinkLabel: 'View repository',
       },
+      { src: '/diagrams/oscar-policy-gate.svg', title: 'OSCAR 3.0 admission architecture', caption: 'Illustrative model based on the recorded 3.0 typed-contract, policy and approval design. Stage 3A qualification is restricted to the local console; the sequence is not a claim of broad OS action support.', sourceLabel: 'OSCAR 3.0 staged design and recorded qualification milestones supplied by Andrew' },
     ],
     stack: [
       'Python',
@@ -109,15 +116,38 @@ export const projects = [
     demo: null,
   },
   {
+    id: 'research-agent',
+    name: 'Autonomous Research Agent',
+    kind: 'Agentic AI project',
+    tags: ['AI agents', 'Research automation', 'LLM applications'],
+    summary: 'A Python tool-using research agent that decomposes a question into iterative research steps, retrieves external evidence and produces structured, citation-backed reports.',
+    points: [
+      'Built a command-line LLM research workflow with tool calling, iterative reasoning and structured report generation.',
+      'Integrated web search, Wikipedia, arXiv and calculator tools to retrieve information and perform calculations.',
+      'Produces source citations in the report so a reader can inspect the evidence behind the answer.',
+    ],
+    workflow: [
+      { title: 'Decompose the question', detail: 'The agent identifies the research subquestions and selects an appropriate tool.' },
+      { title: 'Retrieve evidence', detail: 'Calls web search, Wikipedia or arXiv for relevant information and the calculator for numerical tasks.' },
+      { title: 'Iterate and synthesize', detail: 'Uses retrieved evidence to guide further research, then organizes the findings into a structured report.' },
+      { title: 'Present citations', detail: 'Returns a report with source references for human review.' },
+    ],
+    scopeNote: 'Research automation prototype; source quality and factual accuracy depend on retrieved evidence and model behavior. No independently measured accuracy or benchmark is claimed.',
+    stack: ['Python', 'LLM APIs', 'Tool calling', 'Web search', 'Wikipedia', 'arXiv', 'Calculator', 'Structured outputs'],
+    repo: null,
+    demo: null,
+  },
+  {
     id: 'tradeassist',
     name: 'TradeAssist',
     kind: 'Personal project',
     tags: ['Quant research', 'Risk'],
     summary:
-      'A Python-based quantitative research and risk-analysis platform for Indian equities, combining historical market-data workflows, strategy evaluation and cost-aware backtesting.',
+      'A Python quantitative research and paper-trading workstation for Indian equities, combining reproducible market data, strategy screening, cost-aware backtesting, risk controls and an offline trading journal.',
     points: [
       'Backtesting covers technical indicators, entry and exit signals, brokerage costs, slippage, stop-losses and trailing stops.',
       'Risk and portfolio analysis includes position sizing, exposure limits, P&L, equity curves, maximum drawdown, Sharpe ratio, win rate and profit factor, with walk-forward evaluation.',
+      'TradeAssist 2.0 RC7 workstation adds resumable market-data workflows, eight strategy families, chronological holdout comparison, order approvals, partial fills/exits and journal recovery.',
       'Best recorded run: IRFC, SMA 20/50 crossover, 5% stop-loss, Jan 2023 to Sep 2026. +24.17% cumulative return, 6.75% CAGR, -11.03% max drawdown over 86 trades. Backtest results only, not a claim of live profit.',
     ],
     workflow: [
@@ -133,6 +163,7 @@ export const projects = [
       { label: 'Trades', value: '86' },
     ],
     metricsLabel: 'Recorded backtest snapshot',
+    verification: { value: '1,511', label: 'Passing regression tests', note: 'Recorded locked Windows workstation dev2 suite. Offline research and paper trading; not live execution.' },
     metricsNote: 'IRFC · SMA 20/50 crossover · 5% stop-loss · January 2023–September 2026. Historical backtest only; this is not live trading performance or a prediction of future returns.',
     scopeNote: 'Research prototype. Results depend on the selected data, strategy parameters and execution assumptions; the recorded backtest should not be presented as live profit.',
     diagrams: [
@@ -157,23 +188,23 @@ export const projects = [
   },
   {
     id: 'finverse',
-    name: 'FinVerse 2.0',
+    name: 'FinVerse',
     kind: 'Final-year project · In development',
-    tags: ['Agentic fintech', 'B2B payments', 'Blockchain', 'IoT'],
+    tags: ['Fintech', 'AI assistance', 'Blockchain', 'IoT'],
     summary:
-      'A next-generation B2B payment-gateway research prototype for the AI era, exploring machine-to-machine agentic commerce through a web dashboard, backend services, an AI copilot and an ESP32-based authentication terminal.',
+      'An AI-assisted financial operating system university prototype combining Django and React financial workflows, rule-based risk screening, blockchain audit anchoring and ESP32/NFC authentication.',
     points: [
-      'Explores payment workflows initiated by users and software agents, with an AI copilot intended to assist with financial operations.',
+      'Explores user-directed payment workflows, with an AI copilot intended to assist financial operations rather than autonomously authorize payments.',
       'Combines a React 19/Vite dashboard, Django/Python backend direction and an ESP32-S3 terminal concept using NFC-based interaction.',
       'The architecture explores blockchain-backed auditability and hardware-assisted authentication; it remains a student prototype under active development, not a live payment network.',
     ],
     workflow: [
-      { title: 'Initiate a payment workflow', detail: 'A business user or authorized software agent starts a payment-related workflow through the dashboard or integration layer.' },
+      { title: 'Initiate a payment workflow', detail: 'A business user starts a payment-related workflow through the dashboard or integration layer.' },
       { title: 'Evaluate and orchestrate', detail: 'Backend services coordinate business rules, payment workflow state and the AI-copilot experience.' },
       { title: 'Authenticate the request', detail: 'The ESP32/NFC terminal concept explores a hardware-backed user or device authentication step.' },
       { title: 'Record and reconcile', detail: 'The prototype explores blockchain metadata anchoring and financial workflow records; it does not claim production-grade settlement.' },
     ],
-    scopeNote: 'Final-year project in development. The agentic-commerce and B2B payment-gateway direction is a prototype/research target; do not describe it as a production payment gateway or imply that all planned integrations are deployed.',
+    scopeNote: 'Final-year prototype under development. Not a production payment gateway or autonomous payment agent. Planned integrations and authentication limitations remain explicitly scoped.',
     implementationCaveats: [
       'Known firmware/backend authentication mismatch: the supplied terminal firmware sends a static API-key header, while the backend endpoint requires timestamped HMAC authentication and a nonce; terminal/backend interoperability is not validated until this interface mismatch is resolved.',
       'The supplied NFC path reads a MIFARE Classic payload using the default MIFARE Classic key, so card anti-cloning resistance is not established.',
@@ -238,13 +269,14 @@ export const projects = [
   {
     id: 'kyc-smartcard',
     name: 'KYC Smart Card',
-    kind: 'Personal / academic project',
+    kind: 'Competition-winning academic project',
     tags: ['IoT', 'Security'],
     summary:
       'A DigiLocker-inspired platform for storing and sharing documents with institutions, with RFID smartcard verification and mobile/Bluetooth authentication.',
     points: [
       'Django web backend, Flutter mobile app, ESP32 with RFID and Bluetooth LE, JWT and document encryption.',
       'Published as two IJIRT papers: the initial RFID repository version and the expanded dual-mode authentication version.',
+      'Won first place at the SE Mini Project Competition in April 2025.',
     ],
     workflow: [
       { title: 'Register or retrieve a document', detail: 'The Django-backed platform manages the document-repository workflow.' },
@@ -271,6 +303,21 @@ export const projects = [
         sourcePaperId: 'kyc-paper-2',
       },
     ],
+  },
+  {
+    id: 'language-identification',
+    name: 'Language Identification',
+    kind: 'Applied NLP project',
+    tags: ['NLP', 'Model evaluation', 'API'],
+    summary: 'A lightweight text-language classifier for 12 languages, served through FastAPI and React. Character-level TF-IDF features and logistic regression achieve 94.44% accuracy on the recorded held-out test set.',
+    points: ['Prepared 360 labeled text samples across 12 languages and used an 80/20 split.', 'Trained a character n-gram TF-IDF pipeline with logistic regression.', 'Recorded 68 correct predictions from 72 held-out samples, with macro F1 of 0.9441; exposed predictions through a FastAPI service and React interface.'],
+    workflow: [{ title: 'Prepare labeled text', detail: 'Split the dataset into training and held-out samples.' }, { title: 'Extract features and classify', detail: 'Compute character-level TF-IDF features and fit logistic regression.' }, { title: 'Evaluate and serve', detail: 'Measure held-out performance and expose the classifier through the API.' }],
+    metrics: [{ label: 'Held-out accuracy', value: '94.44%' }, { label: 'Correct predictions', value: '68/72' }, { label: 'Macro F1', value: '0.9441' }],
+    metricsNote: 'Recorded evaluation on a small, 72-sample held-out set, not evidence of broad real-world generalization.',
+    scopeNote: 'Academic NLP prototype with a small labeled dataset; generalization on larger, independent corpora has not been established.',
+    stack: ['Python', 'scikit-learn', 'TF-IDF', 'Logistic regression', 'FastAPI', 'React'],
+    repo: null,
+    demo: null,
   },
 ]
 
@@ -307,14 +354,16 @@ export const publications = [
 export const skills = {
   Languages: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'C/C++', 'Dart'],
   'Agentic AI and LLM engineering': [
-    'LLM APIs (Gemini, OpenAI, Claude, OmniRoute)',
+    'LLM APIs (Gemini, OpenAI-compatible APIs, OmniRoute)',
     'Local LLMs (Ollama)',
     'Tool calling',
     'Agent orchestration',
     'LangChain',
     'LangGraph',
     'Prompt and workflow evaluation',
-    'RAG fundamentals'
+    'RAG, embeddings and vector search',
+    'Structured outputs and typed action contracts',
+    'Policy gates and human approval',
   ],
   'Automation and computer use': [
     'Playwright',
@@ -336,7 +385,7 @@ export const skills = {
   'Backend and data': [
     'Django',
     'FastAPI',
-    "Selenium",
+    'Django REST Framework',
     'REST APIs',
     'Relational databases',
     'Parquet',
