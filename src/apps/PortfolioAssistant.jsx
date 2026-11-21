@@ -1,3 +1,4 @@
+import LinkArrow from '../components/LinkArrow'
 import { useEffect, useRef, useState } from 'react'
 import { useOS } from '../store'
 import { generateLocalPortfolioAnswer, loadLocalPortfolioEngine, supportsLocalPortfolioAI, LOCAL_MODEL_ID } from '../localPortfolioAI'
@@ -29,10 +30,10 @@ function SourceLinks({ documents, onOpenApp }) {
     <div className="portfolio-ai-sources" aria-label="Related portfolio sources">
       <span>RELATED</span>
       {uniqueLinks.map((source, index) => source.href ? (
-        <a key={`${source.href}-${index}`} href={source.href} target={source.href.startsWith('https://') ? '_blank' : undefined} rel={source.href.startsWith('https://') ? 'noopener noreferrer' : undefined}>{sourceLabel(source)} ↗</a>
+        <a key={`${source.href}-${index}`} href={source.href} target={source.href.startsWith('https://') ? '_blank' : undefined} rel={source.href.startsWith('https://') ? 'noopener noreferrer' : undefined}>{sourceLabel(source)} <LinkArrow /></a>
       ) : (
         <button key={`${sourceLabel(source)}-${index}`} type="button" onClick={() => onOpenApp(source.appTarget, source.projectId)}>
-          {sourceLabel(source)} <span aria-hidden="true">↗</span>
+          {sourceLabel(source)} <span aria-hidden="true"><LinkArrow /></span>
         </button>
       ))}
     </div>
@@ -43,7 +44,8 @@ export default function PortfolioAssistant() {
   const messageSequence = useRef(0)
   const nextMessageId = () => `portfolio-ai-${++messageSequence.current}`
   const openApp = useOS((state) => state.openApp)
-  const setSelectedProject = useOS((state) => state.setSelectedProject)
+  const openProject = useOS((state) => state.openProject)
+  const openProjectDirectory = useOS((state) => state.openProjectDirectory)
   const [question, setQuestion] = useState('')
   const [messages, setMessages] = useState(() => [{
     id: 'welcome-message',
@@ -76,7 +78,7 @@ export default function PortfolioAssistant() {
 
   const openSourceApp = (appTarget, projectId) => {
     if (!appTarget) return
-    if (appTarget === 'projects' && projectId) setSelectedProject(projectId)
+    if (appTarget === 'projects') return projectId ? openProject(projectId) : openProjectDirectory()
     openApp(appTarget)
   }
 
@@ -231,7 +233,7 @@ export default function PortfolioAssistant() {
               ? 'Answers generated on-device.'
               : 'Load Local AI for open-ended questions. Requires WebGPU and a model download.'}
           </span>
-          <small>{LOCAL_MODEL_ID} · Facts retrieved at answer time · <a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">WebLLM ↗</a></small>
+          <small>{LOCAL_MODEL_ID} · Facts retrieved at answer time · <a href="https://github.com/mlc-ai/web-llm" target="_blank" rel="noopener noreferrer">WebLLM <LinkArrow /></a></small>
         </div>
         <div className="portfolio-ai-mode-actions">
           {engineState === 'ready' ? (
@@ -279,7 +281,7 @@ export default function PortfolioAssistant() {
       {messages.length >= 1 && (
         <div className="portfolio-ai-suggestions" aria-label="Suggested questions">
           <p className="portfolio-kicker">SUGGESTED</p>
-          {SUGGESTIONS.map((suggestion) => <button key={suggestion} type="button" onClick={() => ask(suggestion)}>{suggestion}<span aria-hidden="true">↗</span></button>)}
+          {SUGGESTIONS.map((suggestion) => <button key={suggestion} type="button" onClick={() => ask(suggestion)}>{suggestion}<span aria-hidden="true"><LinkArrow /></span></button>)}
         </div>
       )}
 
@@ -296,7 +298,7 @@ export default function PortfolioAssistant() {
             autoComplete="off"
             disabled={busy}
           />
-          <button type="submit" disabled={!question.trim() || busy}>Ask <span aria-hidden="true">↗</span></button>
+          <button type="submit" disabled={!question.trim() || busy}>Ask <span aria-hidden="true"><LinkArrow /></span></button>
         </div>
         <small>Check linked case studies for details.</small>
       </form>

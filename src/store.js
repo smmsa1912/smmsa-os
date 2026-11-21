@@ -1,7 +1,9 @@
 import { create } from 'zustand'
-import { appMeta } from './appMeta'
-import { THEMES, WALLPAPERS } from './wallpapers'
-import { playSound } from './sound'
+import { appMeta } from './appMeta.js'
+import { THEMES, WALLPAPERS } from './wallpapers.js'
+import { playSound } from './sound.js'
+import { projects } from './data.js'
+import { TOUR_STEPS } from './recruiterTourSteps.js'
 
 const PREF_KEY = 'smmsa-prefs-v7'
 const LEGACY_PREF_KEY = 'smmsa-prefs-v6'
@@ -63,6 +65,9 @@ export const useOS = create((set, get) => ({
   activeId: null,
   recruiterTourStep: -1,
   selectedProjectId: 'oscar',
+  projectQuery: '',
+  projectFilter: 'all',
+  projectNavigationRevision: 0,
   recentApps: [],
   startOpen: false,
   locked: false,
@@ -103,8 +108,24 @@ export const useOS = create((set, get) => ({
   },
 
   setSelectedProject: (selectedProjectId) => set({ selectedProjectId }),
+  setProjectQuery: (projectQuery) => set({ projectQuery }),
+  setProjectFilter: (projectFilter) => set({ projectFilter }),
+  // Explicit links must not inherit the directory's previous search or category.
+  openProject: (selectedProjectId) => {
+    if (!projects.some((project) => project.id === selectedProjectId)) return false
+    set((s) => ({ selectedProjectId, projectQuery: '', projectFilter: 'all',
+      projectNavigationRevision: s.projectNavigationRevision + 1 }))
+    return get().openApp('projects')
+  },
+  openProjectDirectory: () => {
+    set((s) => ({ projectQuery: '', projectFilter: 'all',
+      projectNavigationRevision: s.projectNavigationRevision + 1 }))
+    return get().openApp('projects')
+  },
   startRecruiterTour: () => set({ recruiterTourStep: 0, startOpen: false }),
-  advanceRecruiterTour: () => set((s) => ({ recruiterTourStep: Math.min(s.recruiterTourStep + 1, 6) })),
+  advanceRecruiterTour: () => set((s) => s.recruiterTourStep < 0 ? s : ({
+    recruiterTourStep: Math.min(s.recruiterTourStep + 1, TOUR_STEPS.length - 1),
+  })),
   endRecruiterTour: () => set({ recruiterTourStep: -1 }),
   toggleStart: () => set((s) => ({ startOpen: !s.startOpen })),
   closeStart: () => set({ startOpen: false }),
@@ -117,6 +138,8 @@ export const useOS = create((set, get) => ({
     locked: true,
     snapPreview: null,
     recruiterTourStep: -1,
+    projectQuery: '',
+    projectFilter: 'all',
     restartCount: s.restartCount + 1,
   })),
 
@@ -196,7 +219,9 @@ export const useOS = create((set, get) => ({
     if (get().sound) playSound('close')
     set((s) => {
       const windows = s.windows.filter((w) => w.id !== id)
-      return { windows, activeId: s.activeId === id ? topVisible(windows) : s.activeId }
+      const closingProjects = s.windows.some((w) => w.id === id && w.appId === 'projects')
+      return { windows, activeId: s.activeId === id ? topVisible(windows) : s.activeId,
+        ...(closingProjects ? { projectQuery: '', projectFilter: 'all' } : {}) }
     })
   },
 

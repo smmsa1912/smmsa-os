@@ -1,3 +1,4 @@
+import LinkArrow from '../components/LinkArrow'
 import { publications } from '../data'
 
 export default function Publications() {
@@ -18,7 +19,7 @@ export default function Publications() {
               {paper.topics.map((topic) => <span className="chip" key={topic}>{topic}</span>)}
             </div>
             <footer className="paper-card-footer">
-              <a href={paper.href} target="_blank" rel="noopener noreferrer">Read paper <span aria-hidden="true">↗</span></a>
+              <a href={paper.href} target="_blank" rel="noopener noreferrer">Read paper <span aria-hidden="true"><LinkArrow /></span></a>
             </footer>
           </article>
         ))}

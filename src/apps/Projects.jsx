@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 import { projects, publications } from '../data'
 import { useOS } from '../store'
+import LinkArrow from '../components/LinkArrow'
 
 const FILTERS = [
   { label: 'All work', value: 'all' },
@@ -26,8 +27,21 @@ function projectMatchesFilter(project, filter) {
 export default function Projects() {
   const selectedProjectId = useOS((state) => state.selectedProjectId)
   const setSelectedProject = useOS((state) => state.setSelectedProject)
-  const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState('all')
+  const query = useOS((state) => state.projectQuery)
+  const setQuery = useOS((state) => state.setProjectQuery)
+  const filter = useOS((state) => state.projectFilter)
+  const setFilter = useOS((state) => state.setProjectFilter)
+  const openApp = useOS((state) => state.openApp)
+  const navigationRevision = useOS((state) => state.projectNavigationRevision)
+  const projectRoot = useRef(null)
+
+  useLayoutEffect(() => {
+    const scroller = projectRoot.current?.closest('.win-body')
+    if (scroller) {
+      scroller.scrollTop = 0
+      scroller.scrollLeft = 0
+    }
+  }, [navigationRevision])
 
   const filteredProjects = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -46,7 +60,7 @@ export default function Projects() {
   }
 
   return (
-    <section className="projects-app">
+    <section className="projects-app" ref={projectRoot}>
       <header className="projects-toolbar">
         <div>
           <p className="portfolio-kicker">PROJECT DIRECTORY</p>
@@ -85,13 +99,19 @@ export default function Projects() {
         </aside>
 
         {selectedProject ? (
-          <article className="project-detail">
+          <article className="project-detail" key={selectedProject.id}>
             <div className="project-detail-topline"><span>CASE STUDY / {selectedProject.id.toUpperCase()}</span><span>{selectedProject.kind}</span></div>
             <h2>{selectedProject.name}</h2>
             <p className="project-detail-summary">{selectedProject.summary}</p>
             <div className="chips project-tags">
               {selectedProject.tags.map((tag) => <span key={tag} className="chip alt">{tag}</span>)}
             </div>
+            {selectedProject.id === 'oscar' && (
+              <section className="project-related-demo">
+                <div><strong>Try related agent behavior</strong><p>Illustrative policy and execution simulation inside SMMSA-OS, not the OSCAR runtime.</p></div>
+                <button type="button" onClick={() => openApp('lab')}>Open Agent Lab <LinkArrow /></button>
+              </section>
+            )}
             {selectedProject.workflow?.length > 0 && (
               <section className="project-detail-section" aria-labelledby={`workflow-${selectedProject.id}`}>
                 <h3 id={`workflow-${selectedProject.id}`}>High-level workflow</h3>
@@ -121,12 +141,12 @@ export default function Projects() {
                         <div className="project-architecture-viewport" role="region" aria-label={`${diagram.title} diagram`} tabIndex={0}>
                           <img src={diagram.src} alt={`${selectedProject.name}: ${diagram.title}. ${diagram.caption}`} loading="lazy" decoding="async" />
                         </div>
-                        <p className="project-diagram-scroll-hint" aria-hidden="true">Swipe to view diagram →</p>
+                        <p className="project-diagram-scroll-hint" aria-hidden="true">Swipe to view diagram <LinkArrow forward /></p>
                         <figcaption>
                           <span>{diagram.caption}</span>
                           {diagram.sourceLabel && <small className="project-diagram-source">Source basis: {diagram.sourceLabel}</small>}
-                          {sourcePaper && <a href={sourcePaper.href} target="_blank" rel="noopener noreferrer">Read source paper ↗</a>}
-                          {diagram.sourceUrl && <a href={diagram.sourceUrl} target="_blank" rel="noopener noreferrer">{diagram.sourceLinkLabel ?? 'Inspect source'} ↗</a>}
+                          {sourcePaper && <a href={sourcePaper.href} target="_blank" rel="noopener noreferrer">Read source paper <LinkArrow /></a>}
+                          {diagram.sourceUrl && <a href={diagram.sourceUrl} target="_blank" rel="noopener noreferrer">{diagram.sourceLinkLabel ?? 'Inspect source'} <LinkArrow /></a>}
                         </figcaption>
                       </figure>
                     )
@@ -166,7 +186,7 @@ export default function Projects() {
                 <h3>Related publication{relatedPapers.length > 1 ? 's' : ''}</h3>
                 <div className="project-paper-links">
                   {relatedPapers.map((paper) => (
-                    <a href={paper.href} target="_blank" rel="noopener noreferrer" key={paper.id}>{paper.title} <span aria-hidden="true">↗</span></a>
+                    <a href={paper.href} target="_blank" rel="noopener noreferrer" key={paper.id}>{paper.title} <span aria-hidden="true"><LinkArrow /></span></a>
                   ))}
                 </div>
               </section>
@@ -180,12 +200,13 @@ export default function Projects() {
             )}
             <footer className="project-detail-footer">
               <div>
-                <strong>{selectedProject.repo || selectedProject.demo ? 'Explore the project' : 'Project notes'}</strong>
-                {!(selectedProject.repo || selectedProject.demo) && <p>No public repository or demo yet.</p>}
+                <strong>{selectedProject.repo || selectedProject.demo || selectedProject.demoVideo ? 'Explore the project' : 'Project notes'}</strong>
+                {!(selectedProject.repo || selectedProject.demo || selectedProject.demoVideo) && <p>Source and demo not linked.</p>}
               </div>
               <div className="links">
-                {selectedProject.repo && <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">View code ↗</a>}
-                {selectedProject.demo && <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>}
+                {selectedProject.repo && <a href={selectedProject.repo} target="_blank" rel="noopener noreferrer">View code <LinkArrow /></a>}
+                {selectedProject.demo && <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">Live demo <LinkArrow /></a>}
+                {selectedProject.demoVideo && <a href={selectedProject.demoVideo} target="_blank" rel="noopener noreferrer">Watch demo <LinkArrow /></a>}
               </div>
             </footer>
           </article>

@@ -1,3 +1,4 @@
+import LinkArrow from '../components/LinkArrow'
 import { profile } from '../data'
 
 export default function Contact() {
@@ -16,7 +17,7 @@ export default function Contact() {
           <a key={row.label} className={`contact-card contact-card-${index + 1}`} href={row.href} target={row.label === 'Email' ? undefined : '_blank'} rel={row.label === 'Email' ? undefined : 'noopener noreferrer'}>
             <span className="contact-card-index">0{index + 1} / {row.label.toUpperCase()}</span>
             <strong>{row.text}</strong>
-            <span className="contact-card-arrow" aria-hidden="true">↗</span>
+            <span className="contact-card-arrow" aria-hidden="true"><LinkArrow /></span>
           </a>
         ))}
       </div>

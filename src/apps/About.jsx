@@ -1,8 +1,10 @@
+import LinkArrow from '../components/LinkArrow'
 import { profile, highlights, education } from '../data'
 import { useOS } from '../store'
 
 export default function About() {
   const openApp = useOS((s) => s.openApp)
+  const openProjectDirectory = useOS((s) => s.openProjectDirectory)
 
   return (
     <article className="about-app doc">
@@ -20,7 +22,7 @@ export default function About() {
       <h3>Highlights</h3>
       <ul className="plain about-highlights">{highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
       <div className="about-actions">
-        <button type="button" className="portfolio-btn primary" onClick={() => openApp('projects')}>Explore my work ↗</button>
+        <button type="button" className="portfolio-btn primary" onClick={openProjectDirectory}>Explore my work <LinkArrow /></button>
         <button type="button" className="portfolio-btn" onClick={() => openApp('skills')}>Skills & tools</button>
         <button type="button" className="portfolio-btn" onClick={() => openApp('contact')}>Contact</button>
       </div>

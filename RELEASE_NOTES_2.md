@@ -1,5 +1,13 @@
 # SMMSA-OS 2.1 — OS-first release
 
+## 2.1.2 Navigation and recruiter tour polish
+
+- Explicit project links from the dashboard, Welcome app, both assistants and guide reset stale Projects search/category state and focus the correct case study. Normal taskbar restoration retains the directory state.
+- The nine-step guided tour includes Agent Execution Lab and Recruiter Copilot, with progress derived from the shared step list.
+- Desktop labels no longer split Dashboard mid-word, and SVG action arrows replace font-dependent glyphs.
+- OSCAR links to a clearly identified related policy simulation in Agent Lab; support for confirmed project demo-video URLs is ready. No unverified repository or fabricated demo links were added.
+- The 2.1.1 resume and factual portfolio content are unchanged.
+
 ## 2.1.1 Content and resume refresh
 
 - Added the Autonomous Research Agent as a seventh case study and featured dashboard project; integrated it into both assistants and the role-evidence comparison.

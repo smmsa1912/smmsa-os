@@ -51,6 +51,7 @@ test('project repository and demo links are valid HTTPS URLs when present', () =
   for (const project of projects) {
     if (project.repo) assert.ok(isHttpsUrl(project.repo), `${project.id} repository must use HTTPS`)
     if (project.demo) assert.ok(isHttpsUrl(project.demo), `${project.id} demo must use HTTPS`)
+    if (project.demoVideo) assert.ok(isHttpsUrl(project.demoVideo), `${project.id} demo video must use HTTPS`)
   }
 })
 

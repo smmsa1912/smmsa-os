@@ -32,7 +32,7 @@ test('agent lab and copilot are true desktop applications with registered window
   assert.match(meta, /copilot: \{ title: 'Recruiter Copilot'/)
   assert.match(registry, /lab: EngineeringLab/)
   assert.match(registry, /copilot: EngineeringCopilot/)
-  assert.match(copilot, /setSelectedProject\(id\); openApp\('projects'\)/)
+  assert.match(copilot, /onProject=\{openProject\}/)
   assert.match(copilot, /onNavigate=\{openApp\}/)
   assert.match(desk, /openApp\('lab'\)/)
   assert.match(desk, /openApp\('copilot'\)/)
@@ -52,14 +52,14 @@ test('recruiter cards cover three featured projects and preserve remaining proje
   assert.ok(profile.resume.startsWith('/'))
 })
 
-test('the OS includes a guided recruiter tour that navigates projects, skills, papers, resume and contact', async () => {
+test('the OS includes a guided recruiter tour with interactive engineering demos', async () => {
   const tour = await source('../src/components/RecruiterTour.jsx')
-  assert.match(tour, /90-SECOND RECRUITER TOUR/)
-  assert.match(tour, /appId: 'projects'/)
-  assert.match(tour, /appId: 'skills'/)
-  assert.match(tour, /appId: 'papers'/)
-  assert.match(tour, /appId: 'resume'/)
-  assert.match(tour, /appId: 'contact'/)
+  const steps = await source('../src/recruiterTourSteps.js')
+  assert.match(steps, /90-SECOND RECRUITER TOUR/)
+  for (const app of ['projects', 'lab', 'copilot', 'skills', 'papers', 'resume', 'contact']) {
+    assert.ok(steps.includes(`appId: '${app}'`))
+  }
+  assert.match(tour, /state.openProject\(step.projectId\)/)
   assert.match(tour, /Skip guided tour/)
   const desktop = await source('../src/components/Desktop.jsx')
   assert.match(desktop, /<RecruiterTour \/>/)
@@ -116,7 +116,7 @@ test('visible UI copy stays concise and removes redundant instructions', async (
     source('../src/apps/RecruiterDesk.jsx'),
     source('../src/apps/QuickView.jsx'),
     source('../src/apps/PortfolioAssistant.jsx'),
-    source('../src/components/RecruiterTour.jsx'),
+    source('../src/recruiterTourSteps.js'),
     source('../src/apps/Settings.jsx'),
     source('../src/apps/Skills.jsx'),
     source('../src/apps/Contact.jsx'),

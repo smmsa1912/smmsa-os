@@ -1,20 +1,18 @@
 import { education, experience, highlights, profile, projects, publications, skills } from '../data'
 import { useOS } from '../store'
+import LinkArrow from '../components/LinkArrow'
 
 const FEATURED_IDS = ['oscar', 'research-agent', 'tradeassist']
 const SKILL_GROUPS = ['Agentic AI and LLM engineering', 'Backend and data', 'Automation and computer use']
 
 export default function RecruiterDesk() {
   const openApp = useOS((state) => state.openApp)
-  const setSelectedProject = useOS((state) => state.setSelectedProject)
+  const openProject = useOS((state) => state.openProject)
+  const openProjectDirectory = useOS((state) => state.openProjectDirectory)
   const startRecruiterTour = useOS((state) => state.startRecruiterTour)
   const featuredProjects = FEATURED_IDS.map((id) => projects.find((project) => project.id === id)).filter(Boolean)
   const currentRole = experience[0]
 
-  const openProject = (projectId) => {
-    setSelectedProject(projectId)
-    openApp('projects')
-  }
 
   return (
     <main className="recruiter-desk-app">
@@ -38,9 +36,9 @@ export default function RecruiterDesk() {
           </div>
         </div>
         <div className="recruiter-desk-actions">
-          <a className="recruiter-desk-action is-primary" href={profile.resume} target="_blank" rel="noopener noreferrer">Open resume PDF <span aria-hidden="true">↗</span></a>
-          <a className="recruiter-desk-action" href={`mailto:${profile.email}`}>Email Andrew <span aria-hidden="true">↗</span></a>
-          <button className="recruiter-desk-action" type="button" onClick={startRecruiterTour}>90-sec tour <span aria-hidden="true">→</span></button>
+          <a className="recruiter-desk-action is-primary" href={profile.resume} target="_blank" rel="noopener noreferrer">Open resume PDF <span aria-hidden="true"><LinkArrow /></span></a>
+          <a className="recruiter-desk-action" href={`mailto:${profile.email}`}>Email Andrew <span aria-hidden="true"><LinkArrow /></span></a>
+          <button className="recruiter-desk-action" type="button" onClick={startRecruiterTour}>90-sec tour <span aria-hidden="true"><LinkArrow forward /></span></button>
         </div>
       </section>
 
@@ -52,14 +50,14 @@ export default function RecruiterDesk() {
       </section>
 
       <section className="dashboard-action-grid" aria-label="Interactive engineering applications">
-        <button type="button" onClick={() => openApp('lab')}><span className="dashboard-action-icon" aria-hidden="true">⌘</span><span><small>LIVE SIMULATION</small><strong>Agent Execution Lab</strong><em>Inspect policy decisions and execution traces.</em></span><b aria-hidden="true">↗</b></button>
-        <button type="button" onClick={() => openApp('copilot')}><span className="dashboard-action-icon" aria-hidden="true">✦</span><span><small>LOCAL-FIRST ASSISTANT</small><strong>Recruiter Copilot</strong><em>Ask technical questions or compare a job description.</em></span><b aria-hidden="true">↗</b></button>
+        <button type="button" onClick={() => openApp('lab')}><span className="dashboard-action-icon" aria-hidden="true">⌘</span><span><small>LIVE SIMULATION</small><strong>Agent Execution Lab</strong><em>Inspect policy decisions and execution traces.</em></span><b aria-hidden="true"><LinkArrow /></b></button>
+        <button type="button" onClick={() => openApp('copilot')}><span className="dashboard-action-icon" aria-hidden="true">✦</span><span><small>LOCAL-FIRST ASSISTANT</small><strong>Recruiter Copilot</strong><em>Ask technical questions or compare a job description.</em></span><b aria-hidden="true"><LinkArrow /></b></button>
       </section>
 
       <section className="recruiter-desk-section">
         <div className="recruiter-desk-section-heading">
           <div><p className="recruiter-desk-eyebrow">SELECTED WORK</p><h2>Selected projects</h2></div>
-          <button type="button" onClick={() => openApp('projects')}>All projects <span aria-hidden="true">↗</span></button>
+          <button type="button" onClick={openProjectDirectory}>All projects <span aria-hidden="true"><LinkArrow /></span></button>
         </div>
         <div className="recruiter-desk-project-grid">
           {featuredProjects.map((project, index) => (
@@ -68,7 +66,7 @@ export default function RecruiterDesk() {
               <strong>{project.name}</strong>
               <span className="recruiter-desk-project-summary">{project.summary}</span>
               <span className="recruiter-desk-tags">{project.tags.slice(0, 3).join(' · ')}</span>
-              <span className="recruiter-desk-open">Open case study <span aria-hidden="true">↗</span></span>
+              <span className="recruiter-desk-open">Open case study <span aria-hidden="true"><LinkArrow /></span></span>
             </button>
           ))}
         </div>
@@ -76,7 +74,7 @@ export default function RecruiterDesk() {
 
       <section className="recruiter-desk-lower-grid">
         <div className="recruiter-desk-panel">
-          <div className="recruiter-desk-section-heading compact"><div><p className="recruiter-desk-eyebrow">TECHNICAL TOOLBOX</p><h2>Core areas</h2></div><button type="button" onClick={() => openApp('skills')}>All skills ↗</button></div>
+          <div className="recruiter-desk-section-heading compact"><div><p className="recruiter-desk-eyebrow">TECHNICAL TOOLBOX</p><h2>Core areas</h2></div><button type="button" onClick={() => openApp('skills')}>All skills <LinkArrow /></button></div>
           <div className="recruiter-desk-skill-groups">
             {SKILL_GROUPS.map((group) => (
               <div key={group}>
@@ -90,9 +88,9 @@ export default function RecruiterDesk() {
           <div className="recruiter-desk-section-heading compact"><div><p className="recruiter-desk-eyebrow">HIGHLIGHTS</p><h2>Other work</h2></div></div>
           <ul>{highlights.slice(0, 4).map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
           <div className="recruiter-desk-link-row">
-            <button type="button" onClick={() => openApp('papers')}>Publications ↗</button>
-            <button type="button" onClick={() => openApp('about')}>Background ↗</button>
-            <button type="button" onClick={() => openApp('assistant')}>Ask My Portfolio ↗</button>
+            <button type="button" onClick={() => openApp('papers')}>Publications <LinkArrow /></button>
+            <button type="button" onClick={() => openApp('about')}>Background <LinkArrow /></button>
+            <button type="button" onClick={() => openApp('assistant')}>Ask My Portfolio <LinkArrow /></button>
           </div>
         </div>
       </section>
@@ -101,9 +99,9 @@ export default function RecruiterDesk() {
 
       <footer className="recruiter-desk-footer">
         <div className="recruiter-desk-socials">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
-          <a href={`mailto:${profile.email}`}>Email ↗</a>
+          <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <LinkArrow /></a>
+          {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <LinkArrow /></a>}
+          <a href={`mailto:${profile.email}`}>Email <LinkArrow /></a>
         </div>
       </footer>
     </main>

@@ -1,3 +1,4 @@
+import LinkArrow from './LinkArrow'
 import { useEffect, useMemo, useState } from 'react'
 import { useOS } from '../store'
 import { appMeta, appOrder } from '../appMeta'
@@ -70,7 +71,7 @@ export default function StartMenu() {
       <button type="button" className="start-recruiter-shortcut" onClick={() => openApp('recruiter')}>
         <span className="start-recruiter-shortcut-icon"><PixelIcon name="briefcase" size={23} /></span>
         <span><strong>Engineering Dashboard</strong><small>Resume, projects, Agent Lab & copilot</small></span>
-        <b aria-hidden="true">↗</b>
+        <b aria-hidden="true"><LinkArrow /></b>
       </button>
 
       {query ? (
@@ -82,7 +83,7 @@ export default function StartMenu() {
                 <button type="button" className="start-app-open" onClick={() => openApp(id)}>
                   <PixelIcon name={appIconName(id, trashCount)} size={21} />
                   <span><strong>{appMeta[id].title}</strong><small>{appMeta[id].label}</small></span>
-                  <b aria-hidden="true">↗</b>
+                  <b aria-hidden="true"><LinkArrow /></b>
                 </button>
                 <button type="button" className="start-pin-toggle" onClick={() => togglePin(id)} aria-label={`${pinnedApps.includes(id) ? 'Unpin' : 'Pin'} ${appMeta[id].title}`} title={pinnedApps.includes(id) ? 'Unpin from Start' : 'Pin to Start'}>{pinnedApps.includes(id) ? '★' : '☆'}</button>
               </div>
@@ -126,7 +127,7 @@ export default function StartMenu() {
                   <button type="button" className="start-pin-toggle" onClick={() => togglePin(id)} aria-label={`${pinnedApps.includes(id) ? 'Unpin' : 'Pin'} ${appMeta[id].title}`} title={pinnedApps.includes(id) ? 'Unpin from Start' : 'Pin to Start'}>{pinnedApps.includes(id) ? '★' : '☆'}</button>
                 </div>
               ))}
-              <a className="start-github-link" href={profile.github} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span><span>GitHub</span></a>
+              <a className="start-github-link" href={profile.github} target="_blank" rel="noopener noreferrer"><span aria-hidden="true"><LinkArrow /></span><span>GitHub</span></a>
             </div>
           </section>
         </>

@@ -75,10 +75,14 @@
   transition: none;
 }
 
-.icon span {
+.icon .icon-label {
   max-width: 100%;
-  overflow-wrap: anywhere;
+  font-size: 8px;
+  overflow-wrap: normal;
+  word-break: normal;
 }
+
+.inline-arrow { display: inline-block; vertical-align: -0.12em; flex-shrink: 0; }
 
 /* ---------- windows ---------- */
 .win {
@@ -2509,6 +2513,12 @@
 .project-detail-footer p { margin: 3px 0; color: #77718e; font-size: 16px; }
 .project-detail-footer .links { margin: 0; }
 .project-detail-footer .links a { font-size: 17px; }
+.project-related-demo { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 14px; padding: 12px; border: 1px solid #b6b1d0; background: #f0efff; }
+.project-related-demo > div { flex: 1 1 200px; min-width: 0; }
+.project-related-demo strong { font-size: 18px; }
+.project-related-demo p { margin: 4px 0 0; font-size: 16px; color: #625b7b; }
+.project-related-demo button { background: var(--blue); color: #fff; padding: 5px 9px; border: 2px solid #211b43; font-size: 17px; }
+.project-related-demo button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .project-empty-detail { display: grid; align-content: center; justify-items: start; }
 .projects-footnote { margin: 0; padding: 8px 12px; border-top: 1px solid #d8d3e8; color: #77718e; background: #fbfaff; font-size: 15px; }
 
@@ -4479,7 +4489,8 @@
 
 .recruiter-tour-progress {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   gap: 4px;
   margin: 13px 0 12px;
 }
