@@ -1,0 +1,14 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "autter_version": "3.9.1",
+  "base_commit_sha": "bdd992790683337ffa591213da6cff2b1ecd0244",
+  "branch": "test/autter-pr-check",
+  "prompts": {},
+  "humans": {
+    "h_35739f8919db45": {
+      "author": "smmsa1912 <andrewneil1912@gmail.com>"
+    }
+  },
+  "integrity": {"v":1,"commit":"bdd992790683337ffa591213da6cff2b1ecd0244","tree":"1b6f50f3e64f4d16aa8e48abc573b86fa992fd21","files":{},"digest":"82728cf8b687ff8284de090ddb193178d188a2a83b7fc76b35bd2eee9b202534"}
+}
